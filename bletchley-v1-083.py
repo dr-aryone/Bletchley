@@ -1,6 +1,7 @@
-""" Bletchley, v1.083 """
+"""Bletchley, v1.083."""
 # v1.083-improved quit game def.improved reveal solution into 1 def
-# v1.082-made mp3s more effecient code and set to play infin til changed\stopped
+# v1.082-made mp3s more effecient code and set to play infin til changed
+#        or stopped
 
 import os
 import random
@@ -35,53 +36,56 @@ colors = ["red", "blue", "white", "yellow", "green", "plum"]
 
 
 def about_menu():
-    """ Display about program info if selected in drop-down menu. """
+    """Display about program info if selected in drop-down menu."""
     messagebox.showinfo("About", "Bletchley V1.083 by Steve Shambles jan 2019")
 
 
 def visit_blog():
-    """ Visit my python blog if selected in drop-down menu. """
+    """Visit my python blog if selected in drop-down menu."""
     webbrowser.open("https://stevepython.wordpress.com/")
 
 
 def visit_bensound():
-    """ Visit bensound.com blog if selected in drop-down menu. """
+    """Visit bensound.com blog if selected in drop-down menu."""
     webbrowser.open("https://bensound.com/")
 
 
 def play_music_track1():
-    """ Play background music if "play track1 " clicked in drop-down menu. """
+    """Play background music if "play track1 " clicked in drop-down menu."""
     play_mp3 = "music\\bensound-thelounge.mp3"
     play_track(play_mp3)
 
 
 def play_music_track2():
-    """ Play background music if "play track 2" clicked in drop-down menu."""
+    """Play background music if "play track 2" clicked in drop-down menu."""
     play_mp3 = "music\\bensound-onceagain.mp3"
     play_track(play_mp3)
 
 
 def play_music_track3():
-    """ Play background music if "play track 3" clicked in drop-down menu. """
+    """Play background music if "play track 3" clicked in drop-down menu."""
     play_mp3 = "music\\bensound-enigmatic.mp3"
     play_track(play_mp3)
 
 
 def play_music_track4():
-    """ Play background music if "play track 4" clicked in drop-down menu. """
+    """Play background music if "play track 4" clicked in drop-down menu."""
     play_mp3 = "music\\bensound-betterdays.mp3"
     play_track(play_mp3)
 
 
 def play_music_all():
-    """ Play all tracks, as pygame queue doesnt work,
-        I just glued the 4 tracks in one. """
+    """Play all tracks.
+
+    As pygame queue doesnt work,
+    I just glued the 4 tracks in one.
+    """
     play_mp3 = "music\\all.mp3"
     play_track(play_mp3)
 
 
 def play_track(play_mp3):
-    """ Check file exists if so Play selected music."""
+    """Check file exists if so Play selected music."""
     if os.path.isfile(play_mp3):
         mixer.music.load(play_mp3)
         mixer.music.play(-1)  # play indefinetly -1. 0 or () = play once.
@@ -91,12 +95,12 @@ def play_track(play_mp3):
 
 
 def stop_music():
-    """ Stop music playing if selected in drop-down menu. """
+    """Stop music playing if selected in drop-down menu."""
     mixer.music.stop()
 
 
 def QUIT():
-    """ Completely quit the game."""
+    """Completely quit the game."""
     stop_music()
     ROOT.destroy()
 
@@ -130,10 +134,10 @@ ROOT.config(menu=MENU_BAR)
 
 
 class Solution:
-    """ Store the four colours of the secret code. """
+    """Store the four colours of the secret code."""
 
     def __init__(self):
-        """'Create the secret code.
+        """Create the secret code.
 
         This code comprises 4 colours, chosen at random from the following six
         colours: 1=red, 2=blue, 3=white, 4=yellow, 5=green, 6=plum.
@@ -156,9 +160,10 @@ class Solution:
 
 
 class outcome:
-    """ Build a string of the hint pegs that go on the yellow label. """
+    """Build a string of the hint pegs that go on the yellow label."""
 
     def __init__(self, out_come, out_come1, out_come2, out_come3, out_come4):
+        """Initialize the outcome class."""
         self.out_come = out_come
         self.out_come1 = out_come1
         self.out_come2 = out_come2
@@ -166,7 +171,7 @@ class outcome:
         self.out_come4 = out_come4
 
     def glue_outcomes_together(self):
-        """ Glue outcomes together. """
+        """Glue outcomes together."""
         self.out_come = (
             str(self.out_come1)
             + str(self.out_come2)
@@ -176,7 +181,7 @@ class outcome:
 
 
 class button_up_row1:
-    """ Variabless for button colours for row 1. """
+    """Variabless for button colours for row 1."""
 
     def __init__(
         self,
@@ -189,7 +194,7 @@ class button_up_row1:
         but_col_1_4,
         current_but_col4,
     ):
-
+        """Initialize the button_up_row1 class."""
         self.but_col_1_1 = but_col_1_1
         self.current_but_col = current_but_col
         self.but_col_1_2 = but_col_1_2
@@ -202,10 +207,10 @@ class button_up_row1:
 
 
 class button_up_row2:
-    """ Variabless for button colours for row 2. """
+    """Variabless for button colours for row 2."""
 
     def __init__(self, but_col_2_1, but_col_2_2, but_col_2_3, but_col_2_4):
-
+        """Initialize the button_up_row2 class."""
         self.but_col_2_1 = but_col_2_1
         self.but_col_2_2 = but_col_2_2
         self.but_col_2_3 = but_col_2_3
@@ -214,10 +219,10 @@ class button_up_row2:
 
 
 class button_up_row3:
-    """ Variabless for button colours for row 3. """
+    """Variabless for button colours for row 3."""
 
     def __init__(self, but_col_3_1, but_col_3_2, but_col_3_3, but_col_3_4):
-
+        """Initialize the button_up_row3 class."""
         self.but_col_3_1 = but_col_3_1
         self.but_col_3_2 = but_col_3_2
         self.but_col_3_3 = but_col_3_3
@@ -226,10 +231,10 @@ class button_up_row3:
 
 
 class button_up_row4:
-    """ Variabless for button colours for row 4. """
+    """Variabless for button colours for row 4."""
 
     def __init__(self, but_col_4_1, but_col_4_2, but_col_4_3, but_col_4_4):
-
+        """Initialize the button_up_row4 class."""
         self.but_col_4_1 = but_col_4_1
         self.but_col_4_2 = but_col_4_2
         self.but_col_4_3 = but_col_4_3
@@ -238,10 +243,10 @@ class button_up_row4:
 
 
 class button_up_row5:
-    """ Variabless for button colours for row 5. """
+    """Variabless for button colours for row 5."""
 
     def __init__(self, but_col_5_1, but_col_5_2, but_col_5_3, but_col_5_4):
-
+        """Initialize the button_up_row5 class."""
         self.but_col_5_1 = but_col_5_1
         self.but_col_5_2 = but_col_5_2
         self.but_col_5_3 = but_col_5_3
@@ -250,10 +255,10 @@ class button_up_row5:
 
 
 class button_up_row6:
-    """ Variabless for button colours for row 6. """
+    """Variabless for button colours for row 6."""
 
     def __init__(self, but_col_6_1, but_col_6_2, but_col_6_3, but_col_6_4):
-
+        """Initialize the button_up_row6 class."""
         self.but_col_6_1 = but_col_6_1
         self.but_col_6_2 = but_col_6_2
         self.but_col_6_3 = but_col_6_3
@@ -262,7 +267,7 @@ class button_up_row6:
 
 # -----------------------------row 1 functions----------------------------
 def decode_row1():
-    """ Check result of the decode button press for row 1. """
+    """Check result of the decode button press for row 1."""
     global user_input
 
     # exit if all 4 colours not entered yet
@@ -323,7 +328,7 @@ def decode_row1():
 
 
 def clk_but_1_1():
-    """ Player clicked but1_1 to change its colour. """
+    """Player clicked but1_1 to change its colour."""
     global temp_bc1_1
 
     # Select next colour 1-6.
@@ -348,7 +353,7 @@ def clk_but_1_1():
 
 
 def clk_but_1_2():
-    """ Player clicked but1_2 to change its colour. """
+    """Player clicked but1_2 to change its colour."""
     global temp_bc1_2
 
     s1.but_col_1_2 += 1
@@ -368,7 +373,7 @@ def clk_but_1_2():
 
 
 def clk_but_1_3():
-    """ Player clicked but1_3 to change its colour. """
+    """Player clicked but1_3 to change its colour."""
     global temp_bc1_3
 
     s1.but_col_1_3 += 1
@@ -388,7 +393,7 @@ def clk_but_1_3():
 
 
 def clk_but_1_4():
-    """ Player clicked but1_4 to change its colour."""
+    """Player clicked but1_4 to change its colour."""
     global temp_bc1_4
 
     s1.but_col_1_4 += 1
@@ -411,7 +416,7 @@ def clk_but_1_4():
 
 
 def decode_row2():
-    """ Decode button for row 2 has been clicked so check input. """
+    """Decode button for row 2 has been clicked so check input."""
     global user_input
 
     if (
@@ -458,7 +463,7 @@ def decode_row2():
 
 
 def clk_but_2_1():
-    """ Player clicked but2_1 to change its colour. """
+    """Player clicked but2_1 to change its colour."""
     global temp_bc2_1
 
     t1.but_col_2_1 += 1
@@ -478,7 +483,7 @@ def clk_but_2_1():
 
 
 def clk_but_2_2():
-    """ Player clicked but2_2 to change its colour. """
+    """Player clicked but2_2 to change its colour."""
     global temp_bc2_2
 
     t1.but_col_2_2 += 1
@@ -498,7 +503,7 @@ def clk_but_2_2():
 
 
 def clk_but_2_3():
-    """ Player clicked but2_3 to change its colour. """
+    """Player clicked but2_3 to change its colour."""
     global temp_bc2_3
 
     t1.but_col_2_3 += 1
@@ -518,7 +523,7 @@ def clk_but_2_3():
 
 
 def clk_but_2_4():
-    """ Player clicked but2_4 to change its colour. """
+    """Player clicked but2_4 to change its colour."""
     global temp_bc2_4
 
     t1.but_col_2_4 += 1
@@ -537,11 +542,11 @@ def clk_but_2_4():
     temp_bc2_4 = s1.current_but_col4
 
 
-# -------------------------row 3------------------------------------------------
+# -------------------------row 3-----------------------------------------------
 
 
 def decode_row3():
-    """ Decode button for row 3 has been clicked so check input. """
+    """Decode button for row 3 has been clicked so check input."""
     global user_input
 
     if (
@@ -587,7 +592,7 @@ def decode_row3():
 
 
 def clk_but_3_1():
-    """ Player clicked but3_1 to change its colour. """
+    """Player clicked but3_1 to change its colour."""
     global temp_bc3_1
 
     u1.but_col_3_1 += 1
@@ -607,7 +612,7 @@ def clk_but_3_1():
 
 
 def clk_but_3_2():
-    """ Player clicked but3_2 to change its colour. """
+    """Player clicked but3_2 to change its colour."""
     global temp_bc3_2
 
     u1.but_col_3_2 += 1
@@ -627,7 +632,7 @@ def clk_but_3_2():
 
 
 def clk_but_3_3():
-    """ Player clicked but3_3 to change its colour. """
+    """Player clicked but3_3 to change its colour."""
     global temp_bc3_3
 
     u1.but_col_3_3 += 1
@@ -647,7 +652,7 @@ def clk_but_3_3():
 
 
 def clk_but_3_4():
-    """ Player clicked but 3_4 to change its colour. """
+    """Player clicked but 3_4 to change its colour."""
     global temp_bc3_4
 
     u1.but_col_3_4 += 1
@@ -670,7 +675,7 @@ def clk_but_3_4():
 
 
 def decode_row4():
-    """ Decode button for row 4 has been clicked so check input. """
+    """Decode button for row 4 has been clicked so check input."""
     global user_input
 
     if (
@@ -715,7 +720,7 @@ def decode_row4():
 
 
 def clk_but_4_1():
-    """ Player clicked but4_1 to change its colour. """
+    """Player clicked but4_1 to change its colour."""
     global temp_bc4_1
 
     v1.but_col_4_1 += 1
@@ -735,8 +740,7 @@ def clk_but_4_1():
 
 
 def clk_but_4_2():
-    """ Player clicked but4_2 to change its colour. """
-
+    """Player clicked but4_2 to change its colour."""
     global temp_bc4_2
 
     v1.but_col_4_2 += 1
@@ -756,7 +760,7 @@ def clk_but_4_2():
 
 
 def clk_but_4_3():
-    """ Player clicked but4_3 to change its colour. """
+    """Player clicked but4_3 to change its colour."""
     global temp_bc4_3
 
     v1.but_col_4_3 += 1
@@ -776,7 +780,7 @@ def clk_but_4_3():
 
 
 def clk_but_4_4():
-    """ Player clicked but4_4 to change its colour. """
+    """Player clicked but4_4 to change its colour."""
     global temp_bc4_4
 
     v1.but_col_4_4 += 1
@@ -795,9 +799,9 @@ def clk_but_4_4():
     temp_bc4_4 = s1.current_but_col4
 
 
-# ---------------------------start row 5----------------------------------------
+# ---------------------------start row 5---------------------------------------
 def decode_row5():
-    """ Decode button for row 5 has been clicked so check input. """
+    """Decode button for row 5 has been clicked so check input."""
     global user_input
 
     if (
@@ -844,7 +848,7 @@ def decode_row5():
 
 
 def clk_but_5_1():
-    """ Player clicked but5_1 to change its colour. """
+    """Player clicked but5_1 to change its colour."""
     global temp_bc5_1
 
     w1.but_col_5_1 += 1
@@ -864,7 +868,7 @@ def clk_but_5_1():
 
 
 def clk_but_5_2():
-    """ Player clicked but5_2 to change its colour. """
+    """Player clicked but5_2 to change its colour."""
     global temp_bc5_2
 
     w1.but_col_5_2 += 1
@@ -884,7 +888,7 @@ def clk_but_5_2():
 
 
 def clk_but_5_3():
-    """ Player clicked but5_3 to change its colour. """
+    """Player clicked but5_3 to change its colour."""
     global temp_bc5_3
 
     w1.but_col_5_3 += 1
@@ -904,7 +908,7 @@ def clk_but_5_3():
 
 
 def clk_but_5_4():
-    """ Player clicked but5_4 to change its colour. """
+    """Player clicked but5_4 to change its colour."""
     global temp_bc5_4
 
     w1.but_col_5_4 += 1
@@ -923,11 +927,11 @@ def clk_but_5_4():
     temp_bc5_4 = s1.current_but_col4
 
 
-# ---start row 6----------------------------------------------------------------
+# ---start row 6---------------------------------------------------------------
 
 
 def decode_row6():
-    """ Decode button for row 6 has been clicked so check input. """
+    """Decode button for row 6 has been clicked so check input."""
     global user_input
 
     if (
@@ -971,7 +975,7 @@ def decode_row6():
 
 
 def clk_but_6_1():
-    """ Player clicked but6_1 to change its colour. """
+    """Player clicked but6_1 to change its colour."""
     global temp_bc6_1
 
     x1.but_col_6_1 += 1
@@ -991,7 +995,7 @@ def clk_but_6_1():
 
 
 def clk_but_6_2():
-    """ Player clicked but6_2 to change its colour. """
+    """Player clicked but6_2 to change its colour."""
     global temp_bc6_2
 
     x1.but_col_6_2 += 1
@@ -1011,7 +1015,7 @@ def clk_but_6_2():
 
 
 def clk_but_6_3():
-    """ Player clicked but6_3 to change its colour."""
+    """Player clicked but6_3 to change its colour."""
     global temp_bc6_3
 
     x1.but_col_6_3 += 1
@@ -1031,7 +1035,7 @@ def clk_but_6_3():
 
 
 def clk_but_6_4():
-    """ Player clicked but6_4 to change its colour."""
+    """Player clicked but6_4 to change its colour."""
     global temp_bc6_4
 
     x1.but_col_6_4 += 1
@@ -1054,14 +1058,14 @@ def clk_but_6_4():
 
 
 def game_over_man():
-    """ Game over, player guessed incorrectly. """
-
+    """Game over, player guessed incorrectly."""
     messagebox.showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
     # subprocess.Popen("bletchley-v1-03.exe")
     QUIT()
 
 
 def display_solution():
+    """Reveal the solution to the player."""
     BUT_SECRET1 = Button(FRAME9, bg=p1.secret_peg1)
     BUT_SECRET1.grid(row=0, column=4, pady=4, padx=4)
     BUT_SECRET2 = Button(FRAME9, bg=p1.secret_peg2)
@@ -1073,7 +1077,7 @@ def display_solution():
 
 
 def check_victory():
-    """ Player has cracked code. """
+    """Player has cracked code."""
     global black
 
     if black < 4:
@@ -1093,7 +1097,7 @@ def check_victory():
 
 
 def reveal_solution():
-    """ Reveal button has been clicked, so show secret_code. """
+    """Reveal button has been clicked, so show secret_code."""
     # Remove the "REVEAL" button to reveal secret code.
     BUT3_9.destroy()
     display_solution()
@@ -1101,7 +1105,7 @@ def reveal_solution():
 
 
 def compare_guess_solution(user_input, secret_code):
-    """ Check what player pegs match secret code. """
+    """Check what player pegs match secret code."""
     global black
     global white
     black = 0
