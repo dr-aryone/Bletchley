@@ -116,34 +116,24 @@ ROOT.config(menu=MENU_BAR)
 # fully what's going on. I put these classes in simply to avoid the use of
 # global statements, there would of been about 60 of them otherwise :-).
 
-class solution:
+class Solution:
   ''' Store the four colours of the secret code. '''
-  def __init__(self, secret_peg1, secret_peg2, secret_peg3, secret_peg4, secret_code_string):
-    self.secret_peg1 = secret_peg1
-    self.secret_peg2 = secret_peg2
-    self.secret_peg3 = secret_peg3
-    self.secret_peg4 = secret_peg4
-    self.secret_code_string = ""
 
-  def generate_rnd_secret_code(self):
-    '''' Create the secret code of 4 colours taken at random from these 6
-    colours: 1=red, 2=blue, 3=white, 4=yellow, 5=green, 6=plum. '''
+  def __init__(self):
+    ''''Create the secret code.
 
-    global secret_code
-    a = colors[random.randrange(0, 6)]
-    b = colors[random.randrange(0, 6)]
-    c = colors[random.randrange(0, 6)]
-    d = colors[random.randrange(0, 6)]
-    secret_code = [a, b, c, d]
-    print("secret code is ", secret_code)#for test puposes
-
-    self.secret_code_string =str(a)+" "+str(b)+" "  \
-    +str(c)+" "+str(d)
-
-    p1.secret_peg1 = a
-    p1.secret_peg2 = b
-    p1.secret_peg3 = c
-    p1.secret_peg4 = d
+    This code comprises 4 colours, chosen at random from the following six
+    colours: 1=red, 2=blue, 3=white, 4=yellow, 5=green, 6=plum.
+    '''
+    # First, generate four randomly-chosen colors and store them in a list.
+    secret_code = [colors[random.randrange(0, 6)] for x in range(4)]
+    # Print out the secret code, for test purpses.
+    print("secret code is ", secret_code)
+    # Create the secret_code_string by joining the four elements, each
+    # separated by a single space.
+    self.secret_code_string = " ".join(secret_code)
+    # Assign the four elements of the secret code to the four secret pegs.
+    [self.secret_peg1, self.secret_peg2, self.secret_peg3, self.secret_peg4] = secret_code
 
 
 
@@ -1132,7 +1122,7 @@ BUT6_5.grid(row=12, column=5, pady=4, padx=4)
 # Initiaize classes.
 # p1 ect. is just a name we can make up to reference the class
 # and pass the initial state of the variables to it.
-p1 = solution (0,0,0,0, "")
+p1 = Solution()
 r1 = outcome (0,0,0,0,0)
 s1 = button_up_row1 (0,"",0,"",0,"",0,"")
 t1 = button_up_row2 (0,0,0,0)
@@ -1154,9 +1144,6 @@ FRAME9 = LabelFrame(ROOT, fg='blue', text='solution', relief=SUNKEN)
 FRAME9.grid()
 BUT3_9 = Button(FRAME9, bg='gold', text='REVEAL', command=reveal_solution)
 BUT3_9.grid(row=9, column=5, pady=4, padx=4)
-
-# Call function in class "solution".
-p1.generate_rnd_secret_code()
 
 # ---Now program control is waiting for button clicks to commence game.-------
 
