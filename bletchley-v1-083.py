@@ -125,6 +125,7 @@ class Solution:
     This code comprises 4 colours, chosen at random from the following six
     colours: 1=red, 2=blue, 3=white, 4=yellow, 5=green, 6=plum.
     '''
+    global secret_code
     # First, generate four randomly-chosen colors and store them in a list.
     secret_code = [colors[random.randrange(0, 6)] for x in range(4)]
     # Print out the secret code, for test purpses.
