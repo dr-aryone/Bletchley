@@ -19,6 +19,7 @@ from tkinter import (
     W,
     messagebox,
 )
+from functools import partial
 
 import string_utils
 from pygame import mixer
@@ -26,6 +27,15 @@ from pygame import mixer
 ROOT = Tk()
 ROOT.title("Bletchley v1.083")
 ROOT.geometry("225x520")
+
+# Define the available song filenames.
+available_songs = {
+    "The Lounge": "bensound-thelounge.mp3",
+    "Once Again": "bensound-onceagain.mp3",
+    "Enigmatic": "bensound-enigmatic.mp3",
+    "Better Days": "bensound-betterdays.mp3",
+    "All Tracks": "all.mp3"
+}
 
 # Initialize pygame music player.
 mixer.init()
@@ -50,47 +60,26 @@ def visit_bensound():
     webbrowser.open("https://bensound.com/")
 
 
-def play_music_track1():
-    """Play background music if "play track1 " clicked in drop-down menu."""
-    play_mp3 = "music\\bensound-thelounge.mp3"
-    play_track(play_mp3)
+def play_music_track(song_file):
+    """Play the user-selected music track from the drop-down menu.
 
-
-def play_music_track2():
-    """Play background music if "play track 2" clicked in drop-down menu."""
-    play_mp3 = "music\\bensound-onceagain.mp3"
-    play_track(play_mp3)
-
-
-def play_music_track3():
-    """Play background music if "play track 3" clicked in drop-down menu."""
-    play_mp3 = "music\\bensound-enigmatic.mp3"
-    play_track(play_mp3)
-
-
-def play_music_track4():
-    """Play background music if "play track 4" clicked in drop-down menu."""
-    play_mp3 = "music\\bensound-betterdays.mp3"
-    play_track(play_mp3)
-
-
-def play_music_all():
-    """Play all tracks.
-
-    As pygame queue doesnt work,
-    I just glued the 4 tracks in one.
+    The `song_file` variable defines which track will be played, from the
+    options defined in the above `available_songs` dictionary.
     """
-    play_mp3 = "music\\all.mp3"
-    play_track(play_mp3)
-
-
-def play_track(play_mp3):
-    """Check file exists if so Play selected music."""
-    if os.path.isfile(play_mp3):
-        mixer.music.load(play_mp3)
-        mixer.music.play(-1)  # play indefinetly -1. 0 or () = play once.
+    # Set the path to the specified music track. We're using os.path.join here
+    # so that this function will work with any OS, not just Windows.
+    track_file = os.path.join("music", song_file)
+    # Check to ensure the track exists.
+    if os.path.isfile(track_file):
+        # If so, load the track...
+        mixer.music.load(track_file)
+        # Then play the track.
+        #   mixer.music.play(-1): play indefinitely.
+        #   mixer.music.play(0) or (): play once.
+        mixer.music.play(-1)
     else:
-        messagebox.showinfo("Ouch!", "File is Missing dude")
+        # The track doesn't exist. Let the user know.
+        messagebox.showinfo("Ouch!", "File is missing dude!")
         return
 
 
@@ -115,11 +104,14 @@ FILE_MENU.add_command(label="Exit", command=QUIT)
 
 FILE_MENU2 = Menu(MENU_BAR, tearoff=0)
 MENU_BAR.add_cascade(label="Music", menu=FILE_MENU2)
-FILE_MENU2.add_command(label="Play The Lounge", command=play_music_track1)
-FILE_MENU2.add_command(label="Play Once Again", command=play_music_track2)
-FILE_MENU2.add_command(label="Play Enigmatic", command=play_music_track3)
-FILE_MENU2.add_command(label="Play Better Days", command=play_music_track4)
-FILE_MENU2.add_command(label="Play All", command=play_music_all)
+# Add the menu items for each of the available songs.
+for song_name in available_songs.keys():
+    FILE_MENU2.add_command(
+        # Define the menu item label.
+        label="Play {}".format(song_name),
+        # Call the function to play the appropriate song.
+        command=partial(play_music_track, available_songs[song_name])
+    )
 FILE_MENU2.add_separator()
 FILE_MENU2.add_command(label="Stop music", command=stop_music)
 FILE_MENU2.add_command(
