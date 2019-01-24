@@ -7,6 +7,7 @@ import os
 import random
 import subprocess
 import webbrowser
+from functools import partial
 from tkinter import (
     DISABLED,
     NORMAL,
@@ -19,7 +20,6 @@ from tkinter import (
     W,
     messagebox,
 )
-from functools import partial
 
 import string_utils
 from pygame import mixer
@@ -34,7 +34,7 @@ available_songs = {
     "Once Again": "bensound-onceagain.mp3",
     "Enigmatic": "bensound-enigmatic.mp3",
     "Better Days": "bensound-betterdays.mp3",
-    "All Tracks": "all.mp3"
+    "All Tracks": "all.mp3",
 }
 
 # Initialize pygame music player.
@@ -50,14 +50,9 @@ def about_menu():
     messagebox.showinfo("About", "Bletchley V1.083 by Steve Shambles jan 2019")
 
 
-def visit_blog():
-    """Visit my python blog if selected in drop-down menu."""
-    webbrowser.open("https://stevepython.wordpress.com/")
-
-
-def visit_bensound():
-    """Visit bensound.com blog if selected in drop-down menu."""
-    webbrowser.open("https://bensound.com/")
+def open_browser(website_url):
+    """Open the specified URL in a browser window."""
+    webbrowser.open(website_url)
 
 
 def play_music_track(song_file):
@@ -98,7 +93,10 @@ def QUIT():
 MENU_BAR = Menu(ROOT)
 FILE_MENU = Menu(MENU_BAR, tearoff=0)
 MENU_BAR.add_cascade(label="Menu", menu=FILE_MENU)
-FILE_MENU.add_command(label="Visit Blog", command=visit_blog)
+FILE_MENU.add_command(
+    label="Visit Blog",
+    command=partial(open_browser, "https://stevepython.wordpress.com/"),
+)
 FILE_MENU.add_command(label="About", command=about_menu)
 FILE_MENU.add_command(label="Exit", command=QUIT)
 
@@ -110,12 +108,13 @@ for song_name in available_songs.keys():
         # Define the menu item label.
         label="Play {}".format(song_name),
         # Call the function to play the appropriate song.
-        command=partial(play_music_track, available_songs[song_name])
+        command=partial(play_music_track, available_songs[song_name]),
     )
 FILE_MENU2.add_separator()
 FILE_MENU2.add_command(label="Stop music", command=stop_music)
 FILE_MENU2.add_command(
-    label="Free music from Bensound.com", command=visit_bensound
+    label="Free music from Bensound.com",
+    command=partial(open_browser, "https://bensound.com/"),
 )
 ROOT.config(menu=MENU_BAR)
 
