@@ -3,7 +3,6 @@
 # v1.082-made mp3s more effecient code and set to play infin til changed
 #        or stopped
 
-import os
 import random
 import subprocess
 import webbrowser
@@ -21,8 +20,9 @@ from tkinter import (
     messagebox,
 )
 
+from libs import music
+
 import string_utils
-from pygame import mixer
 
 ROOT = Tk()
 ROOT.title("Bletchley v1.083")
@@ -36,9 +36,8 @@ available_songs = {
     "Better Days": "bensound-betterdays.mp3",
     "All Tracks": "all.mp3",
 }
-
-# Initialize pygame music player.
-mixer.init()
+# Initialize the Tunes class.
+tunes = music.Tunes(available_songs)
 
 user_input = []
 secret_code = []
@@ -55,37 +54,9 @@ def open_browser(website_url):
     webbrowser.open(website_url)
 
 
-def play_music_track(song_file):
-    """Play the user-selected music track from the drop-down menu.
-
-    The `song_file` variable defines which track will be played, from the
-    options defined in the above `available_songs` dictionary.
-    """
-    # Set the path to the specified music track. We're using os.path.join here
-    # so that this function will work with any OS, not just Windows.
-    track_file = os.path.join("music", song_file)
-    # Check to ensure the track exists.
-    if os.path.isfile(track_file):
-        # If so, load the track...
-        mixer.music.load(track_file)
-        # Then play the track.
-        #   mixer.music.play(-1): play indefinitely.
-        #   mixer.music.play(0) or (): play once.
-        mixer.music.play(-1)
-    else:
-        # The track doesn't exist. Let the user know.
-        messagebox.showinfo("Ouch!", "File is missing dude!")
-        return
-
-
-def stop_music():
-    """Stop music playing if selected in drop-down menu."""
-    mixer.music.stop()
-
-
 def QUIT():
     """Completely quit the game."""
-    stop_music()
+    tunes.stop_music()
     ROOT.destroy()
 
 
@@ -103,15 +74,15 @@ FILE_MENU.add_command(label="Exit", command=QUIT)
 FILE_MENU2 = Menu(MENU_BAR, tearoff=0)
 MENU_BAR.add_cascade(label="Music", menu=FILE_MENU2)
 # Add the menu items for each of the available songs.
-for song_name, song_file in available_songs.items():
+for song_name, song_file in tunes.track_list():
     FILE_MENU2.add_command(
         # Define the menu item label.
         label="Play {}".format(song_name),
         # Call the function to play the appropriate song.
-        command=partial(play_music_track, song_file),
+        command=partial(tunes.play_track, song_file),
     )
 FILE_MENU2.add_separator()
-FILE_MENU2.add_command(label="Stop music", command=stop_music)
+FILE_MENU2.add_command(label="Stop music", command=tunes.stop_music)
 FILE_MENU2.add_command(
     label="Free music from Bensound.com",
     command=partial(open_browser, "https://bensound.com/"),
