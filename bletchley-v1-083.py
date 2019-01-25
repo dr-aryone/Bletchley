@@ -19,6 +19,7 @@ from tkinter.messagebox import showinfo
 import string_utils
 
 from libs import music
+from libs.game_logic import BletchleyGame
 
 # Define the available song filenames.
 available_songs = {
@@ -89,30 +90,6 @@ ROOT.config(menu=MENU_BAR)
 # This is the first time I have used classes and I don't really understand
 # I put these classes in simply to avoid the use of
 # global statements, there would of been about 60 of them otherwise :-).
-
-
-class Solution:
-    """Store the four colours of the secret code."""
-
-    def __init__(self):
-        """Create the secret code.
-
-        This code comprises 4 colours, chosen at random from the following six
-        colours: 1=red, 2=blue, 3=white, 4=yellow, 5=green, 6=plum.
-        """
-        global secret_code
-        # First, generate four randomly-chosen colors and store them in a list.
-        secret_code = [colors[random.randrange(0, 6)] for x in range(4)]
-        # Print out the secret code, for test purpses.
-        print("secret code is ", secret_code)
-        # Assign the four elements of the secret code to the four secret pegs.
-        [
-            self.secret_peg1,
-            self.secret_peg2,
-            self.secret_peg3,
-            self.secret_peg4,
-        ] = secret_code
-
 
 class button_up_row1:
     """Variabless for button colours for row 1."""
@@ -220,7 +197,7 @@ def decode_row1():
     user_input = [temp_bc1_1, temp_bc1_2, temp_bc1_3, temp_bc1_4]
 
     # Check user-input against secret_code.
-    compare_guess_solution(user_input, secret_code)
+    compare_guess_solution(user_input, game.secret_code)
 
     # Construct the outcome string for output to the yesllow label.
     outcome_string = ""
@@ -365,7 +342,7 @@ def decode_row2():
 
     user_input = [temp_bc2_1, temp_bc2_2, temp_bc2_3, temp_bc2_4]
 
-    compare_guess_solution(user_input, secret_code)
+    compare_guess_solution(user_input, game.secret_code)
 
     outcome_string = ""
     if black:
@@ -494,7 +471,7 @@ def decode_row3():
     BUT3_5.configure(state=DISABLED)
     user_input = [temp_bc3_1, temp_bc3_2, temp_bc3_3, temp_bc3_4]
 
-    compare_guess_solution(user_input, secret_code)
+    compare_guess_solution(user_input, game.secret_code)
 
     outcome_string = ""
     if black:
@@ -623,7 +600,7 @@ def decode_row4():
     BUT4_5.configure(state=DISABLED)
     user_input = [temp_bc4_1, temp_bc4_2, temp_bc4_3, temp_bc4_4]
 
-    compare_guess_solution(user_input, secret_code)
+    compare_guess_solution(user_input, game.secret_code)
 
     outcome_string = ""
     if black:
@@ -750,7 +727,7 @@ def decode_row5():
 
     user_input = [temp_bc5_1, temp_bc5_2, temp_bc5_3, temp_bc5_4]
 
-    compare_guess_solution(user_input, secret_code)
+    compare_guess_solution(user_input, game.secret_code)
 
     outcome_string = ""
     if black:
@@ -879,7 +856,7 @@ def decode_row6():
     BUT6_5.configure(state=DISABLED)
     user_input = [temp_bc6_1, temp_bc6_2, temp_bc6_3, temp_bc6_4]
 
-    compare_guess_solution(user_input, secret_code)
+    compare_guess_solution(user_input, game.secret_code)
 
     outcome_string = ""
     if black:
@@ -999,13 +976,13 @@ def game_over_man():
 
 def display_solution():
     """Reveal the solution to the player."""
-    BUT_SECRET1 = Button(FRAME9, bg=game_solution.secret_peg1)
+    BUT_SECRET1 = Button(FRAME9, bg=game.secret_code[0])
     BUT_SECRET1.grid(row=0, column=4, pady=4, padx=4)
-    BUT_SECRET2 = Button(FRAME9, bg=game_solution.secret_peg2)
+    BUT_SECRET2 = Button(FRAME9, bg=game.secret_code[1])
     BUT_SECRET2.grid(row=0, column=5, pady=4, padx=4)
-    BUT_SECRET3 = Button(FRAME9, bg=game_solution.secret_peg3)
+    BUT_SECRET3 = Button(FRAME9, bg=game.secret_code[2])
     BUT_SECRET3.grid(row=0, column=6, pady=4, padx=4)
-    BUT_SECRET3 = Button(FRAME9, bg=game_solution.secret_peg4)
+    BUT_SECRET3 = Button(FRAME9, bg=game.secret_code[3])
     BUT_SECRET3.grid(row=0, column=7, pady=4, padx=4)
 
 
@@ -1172,9 +1149,9 @@ BUT6_5 = Button(FRAME6, bg="green2", text="DECODE", command=decode_row6)
 BUT6_5.grid(row=12, column=5, pady=4, padx=4)
 
 # Initiaize classes.
-# game_solution ect. is just a name we can make up to reference the class
+# game ect. is just a name we can make up to reference the class
 # and pass the initial state of the variables to it.
-game_solution = Solution()
+game = BletchleyGame()
 s1 = button_up_row1(0, "", 0, "", 0, "", 0, "")
 t1 = button_up_row2(0, 0, 0, 0)
 u1 = button_up_row3(0, 0, 0, 0)
