@@ -114,14 +114,6 @@ class Solution:
         ] = secret_code
 
 
-class outcome:
-    """Build a string of the hint pegs that go on the yellow label."""
-
-    def __init__(self, out_come):
-        """Initialize the outcome class."""
-        self.out_come = out_come
-
-
 class button_up_row1:
     """Variabless for button colours for row 1."""
 
@@ -231,17 +223,17 @@ def decode_row1():
     compare_guess_solution(user_input, secret_code)
 
     # Construct the outcome string for output to the yesllow label.
-    r1.out_come = ""
+    outcome_string = ""
     if black:
-        r1.out_come = "*" * black
+        outcome_string = "*" * black
     if white:
-        r1.out_come = r1.out_come + "x" * white
+        outcome_string = outcome_string + "x" * white
 
     if black == 0 and white == 0:
-        r1.out_come = "0000"
+        outcome_string = "0000"
 
     # rnd shuffle the out_come answer so player does not see order of results
-    shuffled = string_utils.shuffle(r1.out_come)
+    shuffled = string_utils.shuffle(outcome_string)
 
     # display outcome in gui on yellow label
     LAB1 = Label(FRAME1, bg="yellow", text=shuffled)
@@ -375,15 +367,15 @@ def decode_row2():
 
     compare_guess_solution(user_input, secret_code)
 
-    r1.out_come = ""
+    outcome_string = ""
     if black:
-        r1.out_come = "*" * black
+        outcome_string = "*" * black
     if white:
-        r1.out_come = r1.out_come + "x" * white
+        outcome_string = outcome_string + "x" * white
     if black == 0 and white == 0:
-        r1.out_come = "0000"
+        outcome_string = "0000"
 
-    shuffled = string_utils.shuffle(r1.out_come)
+    shuffled = string_utils.shuffle(outcome_string)
 
     LAB1 = Label(FRAME2, bg="yellow", text=shuffled)
     LAB1.grid(row=8, column=4, pady=4, padx=4, sticky=W)
@@ -504,15 +496,15 @@ def decode_row3():
 
     compare_guess_solution(user_input, secret_code)
 
-    r1.out_come = ""
+    outcome_string = ""
     if black:
-        r1.out_come = "*" * black
+        outcome_string = "*" * black
     if white:
-        r1.out_come = r1.out_come + "x" * white
+        outcome_string = outcome_string + "x" * white
     if black == 0 and white == 0:
-        r1.out_come = "0000"
+        outcome_string = "0000"
 
-    shuffled = string_utils.shuffle(r1.out_come)
+    shuffled = string_utils.shuffle(outcome_string)
 
     LAB1 = Label(FRAME3, bg="yellow", text=shuffled)
     LAB1.grid(row=9, column=4, pady=4, padx=4, sticky=W)
@@ -633,15 +625,15 @@ def decode_row4():
 
     compare_guess_solution(user_input, secret_code)
 
-    r1.out_come = ""
+    outcome_string = ""
     if black:
-        r1.out_come = "*" * black
+        outcome_string = "*" * black
     if white:
-        r1.out_come = r1.out_come + "x" * white
+        outcome_string = outcome_string + "x" * white
     if black == 0 and white == 0:
-        r1.out_come = "0000"
+        outcome_string = "0000"
 
-    shuffled = string_utils.shuffle(r1.out_come)
+    shuffled = string_utils.shuffle(outcome_string)
 
     LAB1 = Label(FRAME4, bg="yellow", text=shuffled)
     LAB1.grid(row=10, column=4, pady=4, padx=4, sticky=W)
@@ -760,15 +752,15 @@ def decode_row5():
 
     compare_guess_solution(user_input, secret_code)
 
-    r1.out_come = ""
+    outcome_string = ""
     if black:
-        r1.out_come = "*" * black
+        outcome_string = "*" * black
     if white:
-        r1.out_come = r1.out_come + "x" * white
+        outcome_string = outcome_string + "x" * white
     if black == 0 and white == 0:
-        r1.out_come = "0000"
+        outcome_string = "0000"
 
-    shuffled = string_utils.shuffle(r1.out_come)
+    shuffled = string_utils.shuffle(outcome_string)
 
     LAB5 = Label(FRAME5, bg="yellow", text=shuffled)
     LAB5.grid(row=11, column=4, pady=4, padx=4, sticky=W)
@@ -889,15 +881,15 @@ def decode_row6():
 
     compare_guess_solution(user_input, secret_code)
 
-    r1.out_come = ""
+    outcome_string = ""
     if black:
-        r1.out_come = "*" * black
+        outcome_string = "*" * black
     if white:
-        r1.out_come = r1.out_come + "x" * white
+        outcome_string = outcome_string + "x" * white
     if black == 0 and white == 0:
-        r1.out_come = "0000"
+        outcome_string = "0000"
 
-    shuffled = string_utils.shuffle(r1.out_come)
+    shuffled = string_utils.shuffle(outcome_string)
     LAB6 = Label(FRAME6, bg="yellow", text=shuffled)
     LAB6.grid(row=12, column=4, pady=4, padx=4, sticky=W)
 
@@ -1183,7 +1175,6 @@ BUT6_5.grid(row=12, column=5, pady=4, padx=4)
 # p1 ect. is just a name we can make up to reference the class
 # and pass the initial state of the variables to it.
 p1 = Solution()
-r1 = outcome(0)
 s1 = button_up_row1(0, "", 0, "", 0, "", 0, "")
 t1 = button_up_row2(0, 0, 0, 0)
 u1 = button_up_row3(0, 0, 0, 0)
