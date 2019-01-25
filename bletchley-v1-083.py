@@ -13,12 +13,12 @@ from tkinter import (
     Menu,
     Tk,
     W,
-    messagebox,
 )
-
-from libs import music
+from tkinter.messagebox import showinfo
 
 import string_utils
+
+from libs import music
 
 ROOT = Tk()
 ROOT.title("Bletchley v1.083")
@@ -40,11 +40,6 @@ secret_code = []
 colors = ["red", "blue", "white", "yellow", "green", "plum"]
 
 
-def about_menu():
-    """Display about program info if selected in drop-down menu."""
-    messagebox.showinfo("About", "Bletchley V1.083 by Steve Shambles jan 2019")
-
-
 def open_browser(website_url):
     """Open the specified URL in a browser window."""
     webbrowser.open(website_url)
@@ -64,7 +59,12 @@ FILE_MENU.add_command(
     label="Visit Blog",
     command=partial(open_browser, "https://stevepython.wordpress.com/"),
 )
-FILE_MENU.add_command(label="About", command=about_menu)
+FILE_MENU.add_command(
+    label="About",
+    command=partial(
+        showinfo, "About", "Bletchley V1.083 by Steve Shambles jan 2019"
+    ),
+)
 FILE_MENU.add_command(label="Exit", command=QUIT)
 
 FILE_MENU2 = Menu(MENU_BAR, tearoff=0)
@@ -1001,7 +1001,7 @@ def clk_but_6_4():
 
 def game_over_man():
     """Game over, player guessed incorrectly."""
-    messagebox.showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
+    showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
     QUIT()
 
 
@@ -1029,7 +1029,7 @@ def check_victory():
     display_solution()
     ROOT.update()
 
-    messagebox.showinfo(
+    showinfo(
         "Bletchley",
         "You genius, " "you cracked the code.\n\n Alan would be proud of you!",
     )
