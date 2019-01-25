@@ -999,13 +999,13 @@ def game_over_man():
 
 def display_solution():
     """Reveal the solution to the player."""
-    BUT_SECRET1 = Button(FRAME9, bg=p1.secret_peg1)
+    BUT_SECRET1 = Button(FRAME9, bg=game_solution.secret_peg1)
     BUT_SECRET1.grid(row=0, column=4, pady=4, padx=4)
-    BUT_SECRET2 = Button(FRAME9, bg=p1.secret_peg2)
+    BUT_SECRET2 = Button(FRAME9, bg=game_solution.secret_peg2)
     BUT_SECRET2.grid(row=0, column=5, pady=4, padx=4)
-    BUT_SECRET3 = Button(FRAME9, bg=p1.secret_peg3)
+    BUT_SECRET3 = Button(FRAME9, bg=game_solution.secret_peg3)
     BUT_SECRET3.grid(row=0, column=6, pady=4, padx=4)
-    BUT_SECRET3 = Button(FRAME9, bg=p1.secret_peg4)
+    BUT_SECRET3 = Button(FRAME9, bg=game_solution.secret_peg4)
     BUT_SECRET3.grid(row=0, column=7, pady=4, padx=4)
 
 
@@ -1172,9 +1172,9 @@ BUT6_5 = Button(FRAME6, bg="green2", text="DECODE", command=decode_row6)
 BUT6_5.grid(row=12, column=5, pady=4, padx=4)
 
 # Initiaize classes.
-# p1 ect. is just a name we can make up to reference the class
+# game_solution ect. is just a name we can make up to reference the class
 # and pass the initial state of the variables to it.
-p1 = Solution()
+game_solution = Solution()
 s1 = button_up_row1(0, "", 0, "", 0, "", 0, "")
 t1 = button_up_row2(0, 0, 0, 0)
 u1 = button_up_row3(0, 0, 0, 0)
