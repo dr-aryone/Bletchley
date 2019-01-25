@@ -1,7 +1,4 @@
-"""Bletchley, v1.083."""
-# v1.083-improved quit game def.improved reveal solution into 1 def
-# v1.082-made mp3s more effecient code and set to play infin til changed
-#        or stopped
+"""Bletchley, github version."""
 
 import os
 import random
@@ -119,7 +116,7 @@ ROOT.config(menu=MENU_BAR)
 
 # -------------classes-----------------------------------------------------
 # This is the first time I have used classes and I don't really understand
-# fully what's going on. I put these classes in simply to avoid the use of
+# I put these classes in simply to avoid the use of
 # global statements, there would of been about 60 of them otherwise :-).
 
 
