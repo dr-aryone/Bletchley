@@ -42,7 +42,6 @@ class Tunes(object):
         else:
             # The track doesn't exist. Let the user know.
             messagebox.showinfo("Ouch!", "File is missing dude!")
-            #return
 
     def stop_music(self):
         """Stop music playing if selected in drop-down menu."""
