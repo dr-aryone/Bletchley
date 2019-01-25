@@ -20,10 +20,6 @@ import string_utils
 
 from libs import music
 
-ROOT = Tk()
-ROOT.title("Bletchley v1.083")
-ROOT.geometry("225x520")
-
 # Define the available song filenames.
 available_songs = {
     "The Lounge": "bensound-thelounge.mp3",
@@ -50,6 +46,10 @@ def QUIT():
     tunes.stop_music()
     ROOT.destroy()
 
+
+ROOT = Tk()
+ROOT.title("Bletchley v1.083")
+ROOT.geometry("225x520")
 
 # Drop-down menu.
 MENU_BAR = Menu(ROOT)
