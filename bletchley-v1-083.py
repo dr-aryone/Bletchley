@@ -103,12 +103,12 @@ FILE_MENU.add_command(label="Exit", command=QUIT)
 FILE_MENU2 = Menu(MENU_BAR, tearoff=0)
 MENU_BAR.add_cascade(label="Music", menu=FILE_MENU2)
 # Add the menu items for each of the available songs.
-for song_name in available_songs.keys():
+for song_name, song_file in available_songs.items():
     FILE_MENU2.add_command(
         # Define the menu item label.
         label="Play {}".format(song_name),
         # Call the function to play the appropriate song.
-        command=partial(play_music_track, available_songs[song_name]),
+        command=partial(play_music_track, song_file),
     )
 FILE_MENU2.add_separator()
 FILE_MENU2.add_command(label="Stop music", command=stop_music)
