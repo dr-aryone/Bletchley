@@ -5,7 +5,6 @@
 
 import os
 import random
-import subprocess
 import webbrowser
 from functools import partial
 from tkinter import (
@@ -138,9 +137,6 @@ class Solution:
         secret_code = [colors[random.randrange(0, 6)] for x in range(4)]
         # Print out the secret code, for test purpses.
         print("secret code is ", secret_code)
-        # Create the secret_code_string by joining the four elements, each
-        # separated by a single space.
-        self.secret_code_string = " ".join(secret_code)
         # Assign the four elements of the secret code to the four secret pegs.
         [
             self.secret_peg1,
@@ -153,22 +149,9 @@ class Solution:
 class outcome:
     """Build a string of the hint pegs that go on the yellow label."""
 
-    def __init__(self, out_come, out_come1, out_come2, out_come3, out_come4):
+    def __init__(self, out_come):
         """Initialize the outcome class."""
         self.out_come = out_come
-        self.out_come1 = out_come1
-        self.out_come2 = out_come2
-        self.out_come3 = out_come3
-        self.out_come4 = out_come4
-
-    def glue_outcomes_together(self):
-        """Glue outcomes together."""
-        self.out_come = (
-            str(self.out_come1)
-            + str(self.out_come2)
-            + str(self.out_come3)
-            + str(self.out_come4)
-        )
 
 
 class button_up_row1:
@@ -1051,7 +1034,6 @@ def clk_but_6_4():
 def game_over_man():
     """Game over, player guessed incorrectly."""
     messagebox.showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
-    # subprocess.Popen("bletchley-v1-03.exe")
     QUIT()
 
 
@@ -1083,7 +1065,6 @@ def check_victory():
         "Bletchley",
         "You genius, " "you cracked the code.\n\n Alan would be proud of you!",
     )
-    # subprocess.Popen("bletchley-v1-03.exe")
     QUIT()
 
 
@@ -1234,7 +1215,7 @@ BUT6_5.grid(row=12, column=5, pady=4, padx=4)
 # p1 ect. is just a name we can make up to reference the class
 # and pass the initial state of the variables to it.
 p1 = Solution()
-r1 = outcome(0, 0, 0, 0, 0)
+r1 = outcome(0)
 s1 = button_up_row1(0, "", 0, "", 0, "", 0, "")
 t1 = button_up_row2(0, 0, 0, 0)
 u1 = button_up_row3(0, 0, 0, 0)
