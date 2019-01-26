@@ -91,6 +91,7 @@ ROOT.config(menu=MENU_BAR)
 # I put these classes in simply to avoid the use of
 # global statements, there would of been about 60 of them otherwise :-).
 
+
 class button_up_row1:
     """Variabless for button colours for row 1."""
 
@@ -196,24 +197,13 @@ def decode_row1():
     # Build user_input string.
     user_input = [temp_bc1_1, temp_bc1_2, temp_bc1_3, temp_bc1_4]
 
-    # Check user-input against secret_code.
-    compare_guess_solution(user_input, game.secret_code)
-
     # Construct the outcome string for output to the yesllow label.
-    outcome_string = ""
-    if black:
-        outcome_string = "*" * black
-    if white:
-        outcome_string = outcome_string + "x" * white
-
-    if black == 0 and white == 0:
-        outcome_string = "0000"
+    peg_string = game.generate_peg_string(user_input)
 
     # rnd shuffle the out_come answer so player does not see order of results
-    shuffled = string_utils.shuffle(outcome_string)
 
     # display outcome in gui on yellow label
-    LAB1 = Label(FRAME1, bg="yellow", text=shuffled)
+    LAB1 = Label(FRAME1, bg="yellow", text=peg_string)
     LAB1.grid(row=7, column=4, pady=4, padx=4, sticky=W)
 
     # Disable row 1 buttons, so cant now be changed by user.
@@ -236,6 +226,9 @@ def decode_row1():
 
     # Now need to enable row2's decode button
     BUT2_5.configure(state=NORMAL)
+
+    # Check user-input against secret_code.
+    compare_guess_solution(user_input, game.secret_code)
 
 
 def clk_but_1_1():
@@ -342,19 +335,9 @@ def decode_row2():
 
     user_input = [temp_bc2_1, temp_bc2_2, temp_bc2_3, temp_bc2_4]
 
-    compare_guess_solution(user_input, game.secret_code)
+    peg_string = game.generate_peg_string(user_input)
 
-    outcome_string = ""
-    if black:
-        outcome_string = "*" * black
-    if white:
-        outcome_string = outcome_string + "x" * white
-    if black == 0 and white == 0:
-        outcome_string = "0000"
-
-    shuffled = string_utils.shuffle(outcome_string)
-
-    LAB1 = Label(FRAME2, bg="yellow", text=shuffled)
+    LAB1 = Label(FRAME2, bg="yellow", text=peg_string)
     LAB1.grid(row=8, column=4, pady=4, padx=4, sticky=W)
 
     BUT3_5.configure(state=NORMAL)
@@ -371,6 +354,8 @@ def decode_row2():
     BUT2_4.grid(row=8, column=3, pady=4, padx=4)
 
     BUT2_4.configure(state=DISABLED)
+
+    compare_guess_solution(user_input, game.secret_code)
 
 
 def clk_but_2_1():
@@ -471,19 +456,9 @@ def decode_row3():
     BUT3_5.configure(state=DISABLED)
     user_input = [temp_bc3_1, temp_bc3_2, temp_bc3_3, temp_bc3_4]
 
-    compare_guess_solution(user_input, game.secret_code)
+    peg_string = game.generate_peg_string(user_input)
 
-    outcome_string = ""
-    if black:
-        outcome_string = "*" * black
-    if white:
-        outcome_string = outcome_string + "x" * white
-    if black == 0 and white == 0:
-        outcome_string = "0000"
-
-    shuffled = string_utils.shuffle(outcome_string)
-
-    LAB1 = Label(FRAME3, bg="yellow", text=shuffled)
+    LAB1 = Label(FRAME3, bg="yellow", text=peg_string)
     LAB1.grid(row=9, column=4, pady=4, padx=4, sticky=W)
 
     BUT3_1 = Button(FRAME3, bg=temp_bc3_1, text=" ")
@@ -500,6 +475,8 @@ def decode_row3():
     BUT3_4.configure(state=DISABLED)
 
     BUT4_5.configure(state=NORMAL)
+
+    compare_guess_solution(user_input, game.secret_code)
 
 
 def clk_but_3_1():
@@ -600,19 +577,9 @@ def decode_row4():
     BUT4_5.configure(state=DISABLED)
     user_input = [temp_bc4_1, temp_bc4_2, temp_bc4_3, temp_bc4_4]
 
-    compare_guess_solution(user_input, game.secret_code)
+    peg_string = game.generate_peg_string(user_input)
 
-    outcome_string = ""
-    if black:
-        outcome_string = "*" * black
-    if white:
-        outcome_string = outcome_string + "x" * white
-    if black == 0 and white == 0:
-        outcome_string = "0000"
-
-    shuffled = string_utils.shuffle(outcome_string)
-
-    LAB1 = Label(FRAME4, bg="yellow", text=shuffled)
+    LAB1 = Label(FRAME4, bg="yellow", text=peg_string)
     LAB1.grid(row=10, column=4, pady=4, padx=4, sticky=W)
     BUT4_1 = Button(FRAME4, bg=temp_bc4_1, text=" ")
     BUT4_1.grid(row=10, column=0, pady=4, padx=4)
@@ -628,6 +595,8 @@ def decode_row4():
     BUT4_4.configure(state=DISABLED)
 
     BUT5_5.configure(state=NORMAL)
+
+    compare_guess_solution(user_input, game.secret_code)
 
 
 def clk_but_4_1():
@@ -727,19 +696,9 @@ def decode_row5():
 
     user_input = [temp_bc5_1, temp_bc5_2, temp_bc5_3, temp_bc5_4]
 
-    compare_guess_solution(user_input, game.secret_code)
+    peg_string = game.generate_peg_string(user_input)
 
-    outcome_string = ""
-    if black:
-        outcome_string = "*" * black
-    if white:
-        outcome_string = outcome_string + "x" * white
-    if black == 0 and white == 0:
-        outcome_string = "0000"
-
-    shuffled = string_utils.shuffle(outcome_string)
-
-    LAB5 = Label(FRAME5, bg="yellow", text=shuffled)
+    LAB5 = Label(FRAME5, bg="yellow", text=peg_string)
     LAB5.grid(row=11, column=4, pady=4, padx=4, sticky=W)
 
     BUT5_1 = Button(FRAME5, bg=temp_bc5_1, text=" ")
@@ -756,6 +715,8 @@ def decode_row5():
     BUT5_4.configure(state=DISABLED)
 
     BUT6_5.configure(state=NORMAL)
+
+    compare_guess_solution(user_input, game.secret_code)
 
 
 def clk_but_5_1():
@@ -856,18 +817,9 @@ def decode_row6():
     BUT6_5.configure(state=DISABLED)
     user_input = [temp_bc6_1, temp_bc6_2, temp_bc6_3, temp_bc6_4]
 
-    compare_guess_solution(user_input, game.secret_code)
+    peg_string = game.generate_peg_string(user_input)
 
-    outcome_string = ""
-    if black:
-        outcome_string = "*" * black
-    if white:
-        outcome_string = outcome_string + "x" * white
-    if black == 0 and white == 0:
-        outcome_string = "0000"
-
-    shuffled = string_utils.shuffle(outcome_string)
-    LAB6 = Label(FRAME6, bg="yellow", text=shuffled)
+    LAB6 = Label(FRAME6, bg="yellow", text=peg_string)
     LAB6.grid(row=12, column=4, pady=4, padx=4, sticky=W)
 
     BUT6_1 = Button(FRAME6, bg=temp_bc6_1, text=" ")
@@ -883,6 +835,8 @@ def decode_row6():
     BUT6_4.grid(row=12, column=3, pady=4, padx=4)
 
     BUT6_4.configure(state=DISABLED)
+
+    compare_guess_solution(user_input, game.secret_code)
 
 
 def clk_but_6_1():
@@ -1048,7 +1002,7 @@ LAB10 = Label(
     FRAME10,
     text="Can you crack the code?\n\n"
     "* = Correct colour and position.\n x = Correct colour, wrong position.\n"
-    "0000 = No colours in code",
+    "blank = No colours in code",
 )
 LAB10.grid(pady=4, padx=4)
 
