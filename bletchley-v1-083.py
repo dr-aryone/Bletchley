@@ -922,14 +922,15 @@ def clk_but_6_4():
 
 def display_solution():
     """Reveal the solution to the player."""
-    BUT_SECRET1 = Button(FRAME9, bg=game.secret_code[0])
-    BUT_SECRET1.grid(row=0, column=4, pady=4, padx=4)
-    BUT_SECRET2 = Button(FRAME9, bg=game.secret_code[1])
-    BUT_SECRET2.grid(row=0, column=5, pady=4, padx=4)
-    BUT_SECRET3 = Button(FRAME9, bg=game.secret_code[2])
-    BUT_SECRET3.grid(row=0, column=6, pady=4, padx=4)
-    BUT_SECRET3 = Button(FRAME9, bg=game.secret_code[3])
-    BUT_SECRET3.grid(row=0, column=7, pady=4, padx=4)
+    secret_buttons = list()
+    # Generate the four buttons that display the secret code.
+    for index in range(len(game.secret_code)):
+        # Create a button.
+        secret_button = Button(FRAME9, bg=game.secret_code[index])
+        # Assign its position.
+        secret_button.grid(row=0, column=(4 + index), pady=4, padx=4)
+        # Add it to the secret_buttons list.
+        secret_buttons.append(secret_button)
 
 
 def check_victory():
