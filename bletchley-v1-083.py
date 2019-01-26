@@ -13,8 +13,12 @@ from tkinter import (
     Menu,
     Tk,
     W,
-    messagebox,
 )
+from tkinter.messagebox import showinfo
+
+# extract_game_logic
+from libs import music
+from libs.game_logic import BletchleyGam
 
 import string_utils
 
@@ -22,6 +26,7 @@ from libs import music
 
 ROOT = Tk()
 ROOT.title("Bletchley v1.083")
+#master
 
 # Define the available song filenames.
 available_songs = {
@@ -34,14 +39,9 @@ available_songs = {
 # Initialize the Tunes class.
 tunes = music.Tunes(available_songs)
 
-user_input = []
+user_guess = []
 secret_code = []
 colors = ["red", "blue", "white", "yellow", "green", "plum"]
-
-
-def about_menu():
-    """Display about program info if selected in drop-down menu."""
-    messagebox.showinfo("About", "Bletchley V1.083 by Steve Shambles jan 2019")
 
 
 def open_browser(website_url):
@@ -55,6 +55,10 @@ def QUIT():
     ROOT.destroy()
 
 
+ROOT = Tk()
+ROOT.title("Bletchley v1.083")
+ROOT.geometry("225x520")
+
 # Drop-down menu.
 MENU_BAR = Menu(ROOT)
 FILE_MENU = Menu(MENU_BAR, tearoff=0)
@@ -63,7 +67,12 @@ FILE_MENU.add_command(
     label="Visit Blog",
     command=partial(open_browser, "https://stevepython.wordpress.com/"),
 )
-FILE_MENU.add_command(label="About", command=about_menu)
+FILE_MENU.add_command(
+    label="About",
+    command=partial(
+        showinfo, "About", "Bletchley V1.083 by Steve Shambles jan 2019"
+    ),
+)
 FILE_MENU.add_command(label="Exit", command=QUIT)
 
 FILE_MENU2 = Menu(MENU_BAR, tearoff=0)
@@ -88,37 +97,6 @@ ROOT.config(menu=MENU_BAR)
 # This is the first time I have used classes and I don't really understand
 # I put these classes in simply to avoid the use of
 # global statements, there would of been about 60 of them otherwise :-).
-
-
-class Solution:
-    """Store the four colours of the secret code."""
-
-    def __init__(self):
-        """Create the secret code.
-
-        This code comprises 4 colours, chosen at random from the following six
-        colours: 1=red, 2=blue, 3=white, 4=yellow, 5=green, 6=plum.
-        """
-        global secret_code
-        # First, generate four randomly-chosen colors and store them in a list.
-        secret_code = [colors[random.randrange(0, 6)] for x in range(4)]
-        # Print out the secret code, for test purpses.
-        print("secret code is ", secret_code)
-        # Assign the four elements of the secret code to the four secret pegs.
-        [
-            self.secret_peg1,
-            self.secret_peg2,
-            self.secret_peg3,
-            self.secret_peg4,
-        ] = secret_code
-
-
-class outcome:
-    """Build a string of the hint pegs that go on the yellow label."""
-
-    def __init__(self, out_come):
-        """Initialize the outcome class."""
-        self.out_come = out_come
 
 
 class button_up_row1:
@@ -209,7 +187,7 @@ class button_up_row6:
 # -----------------------------row 1 functions----------------------------
 def decode_row1():
     """Check result of the decode button press for row 1."""
-    global user_input
+    global user_guess
 
     # exit if all 4 colours not entered yet
     if (
@@ -223,27 +201,16 @@ def decode_row1():
     # Disable decode button, so no cheating.
     BUT1_5.configure(state=DISABLED)
 
-    # Build user_input string.
-    user_input = [temp_bc1_1, temp_bc1_2, temp_bc1_3, temp_bc1_4]
-
-    # Check user-input against secret_code.
-    compare_guess_solution(user_input, secret_code)
+    # Build user_guess string.
+    user_guess = [temp_bc1_1, temp_bc1_2, temp_bc1_3, temp_bc1_4]
 
     # Construct the outcome string for output to the yesllow label.
-    r1.out_come = ""
-    if black:
-        r1.out_come = "*" * black
-    if white:
-        r1.out_come = r1.out_come + "x" * white
-
-    if black == 0 and white == 0:
-        r1.out_come = "0000"
+    peg_string = game.generate_peg_string(user_guess)
 
     # rnd shuffle the out_come answer so player does not see order of results
-    shuffled = string_utils.shuffle(r1.out_come)
 
     # display outcome in gui on yellow label
-    LAB1 = Label(FRAME1, bg="yellow", text=shuffled)
+    LAB1 = Label(FRAME1, bg="yellow", text=peg_string)
     LAB1.grid(row=7, column=4, pady=4, padx=4, sticky=W)
 
     # Disable row 1 buttons, so cant now be changed by user.
@@ -266,6 +233,9 @@ def decode_row1():
 
     # Now need to enable row2's decode button
     BUT2_5.configure(state=NORMAL)
+
+    # Check user-input against secret_code.
+    compare_guess_solution(user_guess)
 
 
 def clk_but_1_1():
@@ -358,7 +328,7 @@ def clk_but_1_4():
 
 def decode_row2():
     """Decode button for row 2 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         t1.but_col_2_1 == 0
@@ -370,21 +340,11 @@ def decode_row2():
 
     BUT2_5.configure(state=DISABLED)
 
-    user_input = [temp_bc2_1, temp_bc2_2, temp_bc2_3, temp_bc2_4]
+    user_guess = [temp_bc2_1, temp_bc2_2, temp_bc2_3, temp_bc2_4]
 
-    compare_guess_solution(user_input, secret_code)
+    peg_string = game.generate_peg_string(user_guess)
 
-    r1.out_come = ""
-    if black:
-        r1.out_come = "*" * black
-    if white:
-        r1.out_come = r1.out_come + "x" * white
-    if black == 0 and white == 0:
-        r1.out_come = "0000"
-
-    shuffled = string_utils.shuffle(r1.out_come)
-
-    LAB1 = Label(FRAME2, bg="yellow", text=shuffled)
+    LAB1 = Label(FRAME2, bg="yellow", text=peg_string)
     LAB1.grid(row=8, column=4, pady=4, padx=4, sticky=W)
 
     BUT3_5.configure(state=NORMAL)
@@ -401,6 +361,8 @@ def decode_row2():
     BUT2_4.grid(row=8, column=3, pady=4, padx=4)
 
     BUT2_4.configure(state=DISABLED)
+
+    compare_guess_solution(user_guess)
 
 
 def clk_but_2_1():
@@ -488,7 +450,7 @@ def clk_but_2_4():
 
 def decode_row3():
     """Decode button for row 3 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         u1.but_col_3_1 == 0
@@ -499,21 +461,11 @@ def decode_row3():
         return
 
     BUT3_5.configure(state=DISABLED)
-    user_input = [temp_bc3_1, temp_bc3_2, temp_bc3_3, temp_bc3_4]
+    user_guess = [temp_bc3_1, temp_bc3_2, temp_bc3_3, temp_bc3_4]
 
-    compare_guess_solution(user_input, secret_code)
+    peg_string = game.generate_peg_string(user_guess)
 
-    r1.out_come = ""
-    if black:
-        r1.out_come = "*" * black
-    if white:
-        r1.out_come = r1.out_come + "x" * white
-    if black == 0 and white == 0:
-        r1.out_come = "0000"
-
-    shuffled = string_utils.shuffle(r1.out_come)
-
-    LAB1 = Label(FRAME3, bg="yellow", text=shuffled)
+    LAB1 = Label(FRAME3, bg="yellow", text=peg_string)
     LAB1.grid(row=9, column=4, pady=4, padx=4, sticky=W)
 
     BUT3_1 = Button(FRAME3, bg=temp_bc3_1, text=" ")
@@ -530,6 +482,8 @@ def decode_row3():
     BUT3_4.configure(state=DISABLED)
 
     BUT4_5.configure(state=NORMAL)
+
+    compare_guess_solution(user_guess)
 
 
 def clk_but_3_1():
@@ -617,7 +571,7 @@ def clk_but_3_4():
 
 def decode_row4():
     """Decode button for row 4 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         v1.but_col_4_1 == 0
@@ -628,21 +582,11 @@ def decode_row4():
         return
 
     BUT4_5.configure(state=DISABLED)
-    user_input = [temp_bc4_1, temp_bc4_2, temp_bc4_3, temp_bc4_4]
+    user_guess = [temp_bc4_1, temp_bc4_2, temp_bc4_3, temp_bc4_4]
 
-    compare_guess_solution(user_input, secret_code)
+    peg_string = game.generate_peg_string(user_guess)
 
-    r1.out_come = ""
-    if black:
-        r1.out_come = "*" * black
-    if white:
-        r1.out_come = r1.out_come + "x" * white
-    if black == 0 and white == 0:
-        r1.out_come = "0000"
-
-    shuffled = string_utils.shuffle(r1.out_come)
-
-    LAB1 = Label(FRAME4, bg="yellow", text=shuffled)
+    LAB1 = Label(FRAME4, bg="yellow", text=peg_string)
     LAB1.grid(row=10, column=4, pady=4, padx=4, sticky=W)
     BUT4_1 = Button(FRAME4, bg=temp_bc4_1, text=" ")
     BUT4_1.grid(row=10, column=0, pady=4, padx=4)
@@ -658,6 +602,8 @@ def decode_row4():
     BUT4_4.configure(state=DISABLED)
 
     BUT5_5.configure(state=NORMAL)
+
+    compare_guess_solution(user_guess)
 
 
 def clk_but_4_1():
@@ -743,7 +689,7 @@ def clk_but_4_4():
 # ---------------------------start row 5---------------------------------------
 def decode_row5():
     """Decode button for row 5 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         w1.but_col_5_1 == 0
@@ -755,21 +701,11 @@ def decode_row5():
 
     BUT5_5.configure(state=DISABLED)
 
-    user_input = [temp_bc5_1, temp_bc5_2, temp_bc5_3, temp_bc5_4]
+    user_guess = [temp_bc5_1, temp_bc5_2, temp_bc5_3, temp_bc5_4]
 
-    compare_guess_solution(user_input, secret_code)
+    peg_string = game.generate_peg_string(user_guess)
 
-    r1.out_come = ""
-    if black:
-        r1.out_come = "*" * black
-    if white:
-        r1.out_come = r1.out_come + "x" * white
-    if black == 0 and white == 0:
-        r1.out_come = "0000"
-
-    shuffled = string_utils.shuffle(r1.out_come)
-
-    LAB5 = Label(FRAME5, bg="yellow", text=shuffled)
+    LAB5 = Label(FRAME5, bg="yellow", text=peg_string)
     LAB5.grid(row=11, column=4, pady=4, padx=4, sticky=W)
 
     BUT5_1 = Button(FRAME5, bg=temp_bc5_1, text=" ")
@@ -786,6 +722,8 @@ def decode_row5():
     BUT5_4.configure(state=DISABLED)
 
     BUT6_5.configure(state=NORMAL)
+
+    compare_guess_solution(user_guess)
 
 
 def clk_but_5_1():
@@ -873,7 +811,7 @@ def clk_but_5_4():
 
 def decode_row6():
     """Decode button for row 6 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         x1.but_col_6_1 == 0
@@ -884,20 +822,11 @@ def decode_row6():
         return
 
     BUT6_5.configure(state=DISABLED)
-    user_input = [temp_bc6_1, temp_bc6_2, temp_bc6_3, temp_bc6_4]
+    user_guess = [temp_bc6_1, temp_bc6_2, temp_bc6_3, temp_bc6_4]
 
-    compare_guess_solution(user_input, secret_code)
+    peg_string = game.generate_peg_string(user_guess)
 
-    r1.out_come = ""
-    if black:
-        r1.out_come = "*" * black
-    if white:
-        r1.out_come = r1.out_come + "x" * white
-    if black == 0 and white == 0:
-        r1.out_come = "0000"
-
-    shuffled = string_utils.shuffle(r1.out_come)
-    LAB6 = Label(FRAME6, bg="yellow", text=shuffled)
+    LAB6 = Label(FRAME6, bg="yellow", text=peg_string)
     LAB6.grid(row=12, column=4, pady=4, padx=4, sticky=W)
 
     BUT6_1 = Button(FRAME6, bg=temp_bc6_1, text=" ")
@@ -913,6 +842,8 @@ def decode_row6():
     BUT6_4.grid(row=12, column=3, pady=4, padx=4)
 
     BUT6_4.configure(state=DISABLED)
+
+    compare_guess_solution(user_guess)
 
 
 def clk_but_6_1():
@@ -998,37 +929,34 @@ def clk_but_6_4():
 # -----------------------------end row 6---------------------------------------
 
 
-def game_over_man():
-    """Game over, player guessed incorrectly."""
-    messagebox.showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
-    QUIT()
-
-
 def display_solution():
     """Reveal the solution to the player."""
-    BUT_SECRET1 = Button(FRAME9, bg=p1.secret_peg1)
-    BUT_SECRET1.grid(row=0, column=4, pady=4, padx=4)
-    BUT_SECRET2 = Button(FRAME9, bg=p1.secret_peg2)
-    BUT_SECRET2.grid(row=0, column=5, pady=4, padx=4)
-    BUT_SECRET3 = Button(FRAME9, bg=p1.secret_peg3)
-    BUT_SECRET3.grid(row=0, column=6, pady=4, padx=4)
-    BUT_SECRET3 = Button(FRAME9, bg=p1.secret_peg4)
-    BUT_SECRET3.grid(row=0, column=7, pady=4, padx=4)
+    secret_buttons = list()
+    # Generate the four buttons that display the secret code.
+    for index in range(len(game.secret_code)):
+        # Create a button.
+        secret_button = Button(FRAME9, bg=game.secret_code[index])
+        # Assign its position.
+        secret_button.grid(row=0, column=(4 + index), pady=4, padx=4)
+        # Add it to the secret_buttons list.
+        secret_buttons.append(secret_button)
 
 
-def check_victory():
-    """Player has cracked code."""
-    global black
+def compare_guess_solution(user_guess):
+    """Check what player pegs match secret code."""
+    # Check to see if their guess was correct.
+    if not game.correct_solution(user_guess):
+        # Their guess was incorrect.
+        return None
 
-    if black < 4:
-        return
-
-    # Remove the "REVEAL" button to reveal secret code.
+    # Their solution was correct.
+    # Reveal the secret code.
     BUT3_9.destroy()
     display_solution()
     ROOT.update()
 
-    messagebox.showinfo(
+    # Let them know they've won.
+    showinfo(
         "Bletchley",
         "You genius, " "you cracked the code.\n\n Alan would be proud of you!",
     )
@@ -1037,35 +965,12 @@ def check_victory():
 
 def reveal_solution():
     """Reveal button has been clicked, so show secret_code."""
-    # Remove the "REVEAL" button to reveal secret code.
+    # Reveal the secret code.
     BUT3_9.destroy()
     display_solution()
-    game_over_man()
-
-
-def compare_guess_solution(user_input, secret_code):
-    """Check what player pegs match secret code."""
-    global black
-    global white
-    black = 0
-    white = 0
-    secret_copy = secret_code[:]
-    user_copy = user_input[:]
-
-    for index, input in enumerate(user_copy):
-        if input == secret_copy[index]:
-            black += 1
-            secret_copy[index] = "checked solution"
-            user_copy[index] = "checked user"
-
-    for index, input in enumerate(user_copy):
-        for i, p in enumerate(secret_copy):
-            if p == input:
-                white += 1
-                secret_copy[i] = "checked solution"
-                break
-
-    check_victory()
+    # Let them know they've lost.
+    showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
+    QUIT()
 
 
 # game Message.
@@ -1078,7 +983,7 @@ LAB10 = Label(
     FRAME10,
     text="Can you crack the code?\n\n"
     "* = Correct colour and position.\n x = Correct colour, wrong position.\n"
-    "0000 = No colours in code",
+    "blank = No colours in code",
 )
 LAB10.grid(pady=4, padx=4)
 
@@ -1179,10 +1084,9 @@ BUT6_5 = Button(FRAME6, bg="green2", text="DECODE", command=decode_row6)
 BUT6_5.grid(row=12, column=5, pady=4, padx=4)
 
 # Initiaize classes.
-# p1 ect. is just a name we can make up to reference the class
+# game ect. is just a name we can make up to reference the class
 # and pass the initial state of the variables to it.
-p1 = Solution()
-r1 = outcome(0)
+game = BletchleyGame()
 s1 = button_up_row1(0, "", 0, "", 0, "", 0, "")
 t1 = button_up_row2(0, 0, 0, 0)
 u1 = button_up_row3(0, 0, 0, 0)
