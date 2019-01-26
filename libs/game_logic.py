@@ -67,6 +67,8 @@ class BletchleyGame(object):
         # just by looking at the order, since the order will always be perfect
         # before partial.
         peg_string = "*" * perfect + "x" * partial
+        # If the peg_string is empty, return "0000".
+        peg_string = "0000" if not peg_string else peg_string
         # Return the peg string.
         return peg_string
 

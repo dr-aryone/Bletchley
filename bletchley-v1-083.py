@@ -16,7 +16,6 @@ from tkinter import (
 )
 from tkinter.messagebox import showinfo
 
-# extract_game_logic
 from libs import music
 from libs.game_logic import BletchleyGame
 
@@ -126,8 +125,10 @@ class GameWindow(object):
         if row_index != 5:
             self.DECODE_BUTTONS[row_index + 1].configure(state=NORMAL)
 
-        # Check user-input against secret_code.
-        if row_index == 5 and not self.compare_guess_solution(user_guess):
+        # Check to see if their solution was correct.
+        correct = self.compare_guess_solution(user_guess)
+        # Check to see if the game is over.
+        if row_index == 5 and not correct:
             # If this is the last guess and they're wrong, reveal the solution
             # and tell the user they've lost.
             self.reveal_solution()
@@ -168,7 +169,6 @@ class GameWindow(object):
         # Construct the main window.
         self.ROOT = Tk()
         self.ROOT.title(game_title)
-        #self.ROOT.geometry("225x520")
 
         # Construct the menu bar.
         self.MENU_BAR = Menu(self.ROOT)
