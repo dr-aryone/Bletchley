@@ -47,7 +47,7 @@ def QUIT():
 
 
 ROOT = Tk()
-ROOT.title("Bletchley button_row_4.083")
+ROOT.title("Bletchley v4.083")
 ROOT.geometry("225x520")
 
 # Drop-down menu.
@@ -897,7 +897,7 @@ def reveal_solution():
 FRAME0 = LabelFrame(ROOT, fg="blue", text="Bletchley", relief=SUNKEN)
 FRAME0.grid(padx=1, pady=1)
 
-FRAME10 = LabelFrame(ROOT, fg="blue", text="Bletchley button_row_4.083", relief=SUNKEN)
+FRAME10 = LabelFrame(ROOT, fg="blue", text="Bletchley v4.083", relief=SUNKEN)
 FRAME10.grid()
 LAB10 = Label(
     FRAME10,
