@@ -75,7 +75,7 @@ class GameWindow(object):
         # Check to see if their guess was correct.
         if not self.game.correct_solution(user_guess):
             # Their guess was incorrect.
-            return None
+            return False
 
         # Their solution was correct.
         # Reveal the secret code.
@@ -126,7 +126,10 @@ class GameWindow(object):
             self.DECODE_BUTTONS[row_index + 1].configure(state=NORMAL)
 
         # Check user-input against secret_code.
-        self.compare_guess_solution(user_guess)
+        if row_index == 5 and not self.compare_guess_solution(user_guess):
+            # If this is the last guess and they're wrong, reveal the solution
+            # and tell the user they've lost.
+            self.reveal_solution()
 
     def display_solution(self):
         """Reveal the solution to the player."""
@@ -164,7 +167,7 @@ class GameWindow(object):
         # Construct the main window.
         self.ROOT = Tk()
         self.ROOT.title(game_title)
-        self.ROOT.geometry("225x520")
+        #self.ROOT.geometry("225x520")
 
         # Construct the menu bar.
         self.MENU_BAR = Menu(self.ROOT)
