@@ -16,8 +16,17 @@ from tkinter import (
 )
 from tkinter.messagebox import showinfo
 
+# extract_game_logic
 from libs import music
-from libs.game_logic import BletchleyGame
+from libs.game_logic import BletchleyGam
+
+import string_utils
+
+from libs import music
+
+ROOT = Tk()
+ROOT.title("Bletchley v1.083")
+#master
 
 # Define the available song filenames.
 available_songs = {
