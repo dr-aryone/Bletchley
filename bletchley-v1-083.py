@@ -16,13 +16,12 @@ from tkinter import (
     messagebox,
 )
 
-from libs import music
-
 import string_utils
+
+from libs import music
 
 ROOT = Tk()
 ROOT.title("Bletchley v1.083")
-ROOT.geometry("225x520")
 
 # Define the available song filenames.
 available_songs = {
