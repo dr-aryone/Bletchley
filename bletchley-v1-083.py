@@ -920,12 +920,6 @@ def clk_but_6_4():
 # -----------------------------end row 6---------------------------------------
 
 
-def game_over_man():
-    """Game over, player guessed incorrectly."""
-    showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
-    QUIT()
-
-
 def display_solution():
     """Reveal the solution to the player."""
     BUT_SECRET1 = Button(FRAME9, bg=game.secret_code[0])
@@ -962,7 +956,8 @@ def reveal_solution():
     # Remove the "REVEAL" button to reveal secret code.
     BUT3_9.destroy()
     display_solution()
-    game_over_man()
+    showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
+    QUIT()
 
 
 def compare_guess_solution(user_input, secret_code):
