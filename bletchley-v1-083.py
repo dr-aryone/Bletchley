@@ -16,8 +16,6 @@ from tkinter import (
 )
 from tkinter.messagebox import showinfo
 
-import string_utils
-
 from libs import music
 from libs.game_logic import BletchleyGame
 
@@ -970,9 +968,7 @@ def reveal_solution():
 def compare_guess_solution(user_input, secret_code):
     """Check what player pegs match secret code."""
     global black
-    global white
     black = 0
-    white = 0
     secret_copy = secret_code[:]
     user_copy = user_input[:]
 
@@ -981,13 +977,6 @@ def compare_guess_solution(user_input, secret_code):
             black += 1
             secret_copy[index] = "checked solution"
             user_copy[index] = "checked user"
-
-    for index, input in enumerate(user_copy):
-        for i, p in enumerate(secret_copy):
-            if p == input:
-                white += 1
-                secret_copy[i] = "checked solution"
-                break
 
     check_victory()
 
