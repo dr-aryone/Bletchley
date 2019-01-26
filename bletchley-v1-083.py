@@ -30,7 +30,15 @@ available_songs = {
 # Initialize the Tunes class.
 tunes = music.Tunes(available_songs)
 
-user_guess = []
+# Initiaize the BletchleyGame class.
+game = BletchleyGame()
+
+# Initialize the dictionary that stores the user's guesses per-row.
+button_rows = dict()
+for row in range(6):
+    button_rows[row] = [None] * 4
+
+# Define the available colors.
 colors = ["red", "blue", "white", "yellow", "green", "plum"]
 
 
@@ -269,14 +277,6 @@ SOLUTION_BUTTON = Button(
 )
 SOLUTION_BUTTON.grid(row=9, column=5, pady=4, padx=4)
 
-
-# Initiaize the BletchleyGame class.
-game = BletchleyGame()
-
-# Initialize the dictionary that stores the user's guesses per-row.
-button_rows = dict()
-for row in range(6):
-    button_rows[row] = [None] * 4
 
 # Start the application.
 ROOT.mainloop()
