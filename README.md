@@ -1,6 +1,6 @@
 Bletchley
 
-Python Mastermind game clone with Tkinter GUI
+Python Mastermind game clone, with GUI.
 
 Source works on Windows, Linux, MAC.
 
