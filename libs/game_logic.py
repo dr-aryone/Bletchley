@@ -69,3 +69,11 @@ class BletchleyGame(object):
         peg_string = "*" * perfect + "x" * partial
         # Return the peg string.
         return peg_string
+
+    def correct_solution(self, user_guess):
+        """Check to see whether the user's guess is the correct solution."""
+        if(self.generate_peg_string(user_guess) == "****"):
+            # Their solution is correct.
+            return True
+        # Their solution is incorrect.
+        return False

@@ -933,18 +933,19 @@ def display_solution():
         secret_buttons.append(secret_button)
 
 
-def check_victory():
-    """Player has cracked code."""
-    global black
+def compare_guess_solution(user_input, secret_code):
+    """Check what player pegs match secret code."""
+    if not game.correct_solution(user_input):
+        # Their guess was incorrect.
+        return None
 
-    if black < 4:
-        return
-
-    # Remove the "REVEAL" button to reveal secret code.
+    # Their solution was correct.
+    # Reveal the secret code.
     BUT3_9.destroy()
     display_solution()
     ROOT.update()
 
+    # Let them know they've won.
     showinfo(
         "Bletchley",
         "You genius, " "you cracked the code.\n\n Alan would be proud of you!",
@@ -954,27 +955,12 @@ def check_victory():
 
 def reveal_solution():
     """Reveal button has been clicked, so show secret_code."""
-    # Remove the "REVEAL" button to reveal secret code.
+    # Reveal the secret code.
     BUT3_9.destroy()
     display_solution()
+    # Let them know they've lost.
     showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
     QUIT()
-
-
-def compare_guess_solution(user_input, secret_code):
-    """Check what player pegs match secret code."""
-    global black
-    black = 0
-    secret_copy = secret_code[:]
-    user_copy = user_input[:]
-
-    for index, input in enumerate(user_copy):
-        if input == secret_copy[index]:
-            black += 1
-            secret_copy[index] = "checked solution"
-            user_copy[index] = "checked user"
-
-    check_victory()
 
 
 # game Message.
