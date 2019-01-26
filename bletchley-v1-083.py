@@ -47,7 +47,7 @@ def QUIT():
 
 
 ROOT = Tk()
-ROOT.title("Bletchley v1.083")
+ROOT.title("Bletchley button_row_4.083")
 ROOT.geometry("225x520")
 
 # Drop-down menu.
@@ -105,21 +105,21 @@ class button_up_row:
 
 
 # -----------------------------row 1 functions----------------------------
-def decode_row1():
+def decode_robutton_row_5():
     """Check result of the decode button press for row 1."""
     global user_guess
 
     # exit if all 4 colours not entered yet
     if (
-        s1.button_1 == 0
-        or s1.button_2 == 0
-        or s1.button_3 == 0
-        or s1.button_4 == 0
+        button_row_1.button_1 == 0
+        or button_row_1.button_2 == 0
+        or button_row_1.button_3 == 0
+        or button_row_1.button_4 == 0
     ):
         return
 
     # Disable decode button, so no cheating.
-    BUT1_5.configure(state=DISABLED)
+    DECODE_BUTTON_1.configure(state=DISABLED)
 
     # Build user_guess string.
     user_guess = [temp_bc1_1, temp_bc1_2, temp_bc1_3, temp_bc1_4]
@@ -152,7 +152,7 @@ def decode_row1():
     BUT1_4.configure(state=DISABLED)
 
     # Now need to enable row2's decode button
-    BUT2_5.configure(state=NORMAL)
+    DECODE_BUTTON_2.configure(state=NORMAL)
 
     # Check user-input against secret_code.
     compare_guess_solution(user_guess)
@@ -163,14 +163,14 @@ def clk_but_1_1():
     global temp_bc1_1
 
     # Select next colour 1-6.
-    s1.button_1 += 1
+    button_row_1.button_1 += 1
 
     # If last colour+1 (6+1), then loop it to first colour.
-    if s1.button_1 == 7:
-        s1.button_1 = 1
+    if button_row_1.button_1 == 7:
+        button_row_1.button_1 = 1
 
     # Convert integer to actual text colour to use as button fg colour.
-    bc = s1.button_1
+    bc = button_row_1.button_1
     current_buttons[0] = str(colors[bc - 1])
 
     # Store colour selected for later use in disabling this button.
@@ -187,12 +187,12 @@ def clk_but_1_2():
     """Player clicked but1_2 to change its colour."""
     global temp_bc1_2
 
-    s1.button_2 += 1
+    button_row_1.button_2 += 1
 
-    if s1.button_2 == 7:
-        s1.button_2 = 1
+    if button_row_1.button_2 == 7:
+        button_row_1.button_2 = 1
 
-    bc = s1.button_2
+    bc = button_row_1.button_2
     current_buttons[1] = str(colors[bc - 1])
 
     temp_bc1_2 = current_buttons[1]
@@ -207,12 +207,12 @@ def clk_but_1_3():
     """Player clicked but1_3 to change its colour."""
     global temp_bc1_3
 
-    s1.button_3 += 1
+    button_row_1.button_3 += 1
 
-    if s1.button_3 == 7:
-        s1.button_3 = 1
+    if button_row_1.button_3 == 7:
+        button_row_1.button_3 = 1
 
-    bc = s1.button_3
+    bc = button_row_1.button_3
     current_buttons[2] = str(colors[bc - 1])
 
     temp_bc1_3 = current_buttons[2]
@@ -227,12 +227,12 @@ def clk_but_1_4():
     """Player clicked but1_4 to change its colour."""
     global temp_bc1_4
 
-    s1.button_4 += 1
+    button_row_1.button_4 += 1
 
-    if s1.button_4 == 7:
-        s1.button_4 = 1
+    if button_row_1.button_4 == 7:
+        button_row_1.button_4 = 1
 
-    bc = s1.button_4
+    bc = button_row_1.button_4
     current_buttons[3] = str(colors[bc - 1])
 
     temp_bc1_4 = current_buttons[3]
@@ -251,14 +251,14 @@ def decode_row2():
     global user_guess
 
     if (
-        t1.button_1 == 0
-        or t1.button_2 == 0
-        or t1.button_3 == 0
-        or t1.button_4 == 0
+        button_row_2.button_1 == 0
+        or button_row_2.button_2 == 0
+        or button_row_2.button_3 == 0
+        or button_row_2.button_4 == 0
     ):
         return
 
-    BUT2_5.configure(state=DISABLED)
+    DECODE_BUTTON_2.configure(state=DISABLED)
 
     user_guess = [temp_bc2_1, temp_bc2_2, temp_bc2_3, temp_bc2_4]
 
@@ -267,7 +267,7 @@ def decode_row2():
     LAB1 = Label(FRAME2, bg="yellow", text=peg_string)
     LAB1.grid(row=8, column=4, pady=4, padx=4, sticky=W)
 
-    BUT3_5.configure(state=NORMAL)
+    DECODE_BUTTON_3.configure(state=NORMAL)
     BUT2_1 = Button(FRAME2, bg=temp_bc2_1, text=" ")
     BUT2_1.grid(row=8, column=0, pady=4, padx=4)
     BUT2_1.configure(state=DISABLED)
@@ -289,12 +289,12 @@ def clk_but_2_1():
     """Player clicked but2_1 to change its colour."""
     global temp_bc2_1
 
-    t1.button_1 += 1
+    button_row_2.button_1 += 1
 
-    if t1.button_1 == 7:
-        t1.button_1 = 1
+    if button_row_2.button_1 == 7:
+        button_row_2.button_1 = 1
 
-    bc = t1.button_1
+    bc = button_row_2.button_1
     current_buttons[0] = str(colors[bc - 1])
 
     BUT2_1 = Button(
@@ -309,12 +309,12 @@ def clk_but_2_2():
     """Player clicked but2_2 to change its colour."""
     global temp_bc2_2
 
-    t1.button_2 += 1
+    button_row_2.button_2 += 1
 
-    if t1.button_2 == 7:
-        t1.button_2 = 1
+    if button_row_2.button_2 == 7:
+        button_row_2.button_2 = 1
 
-    bc = t1.button_2
+    bc = button_row_2.button_2
     current_buttons[1] = str(colors[bc - 1])
 
     BUT2_2 = Button(
@@ -329,12 +329,12 @@ def clk_but_2_3():
     """Player clicked but2_3 to change its colour."""
     global temp_bc2_3
 
-    t1.button_3 += 1
+    button_row_2.button_3 += 1
 
-    if t1.button_3 == 7:
-        t1.button_3 = 1
+    if button_row_2.button_3 == 7:
+        button_row_2.button_3 = 1
 
-    bc = t1.button_3
+    bc = button_row_2.button_3
     current_buttons[2] = str(colors[bc - 1])
 
     BUT2_3 = Button(
@@ -349,12 +349,12 @@ def clk_but_2_4():
     """Player clicked but2_4 to change its colour."""
     global temp_bc2_4
 
-    t1.button_4 += 1
+    button_row_2.button_4 += 1
 
-    if t1.button_4 == 7:
-        t1.button_4 = 1
+    if button_row_2.button_4 == 7:
+        button_row_2.button_4 = 1
 
-    bc = t1.button_4
+    bc = button_row_2.button_4
     current_buttons[3] = str(colors[bc - 1])
 
     BUT2_4 = Button(
@@ -373,14 +373,14 @@ def decode_row3():
     global user_guess
 
     if (
-        u1.button_1 == 0
-        or u1.button_2 == 0
-        or u1.button_3 == 0
-        or u1.button_4 == 0
+        button_row_3.button_1 == 0
+        or button_row_3.button_2 == 0
+        or button_row_3.button_3 == 0
+        or button_row_3.button_4 == 0
     ):
         return
 
-    BUT3_5.configure(state=DISABLED)
+    DECODE_BUTTON_3.configure(state=DISABLED)
     user_guess = [temp_bc3_1, temp_bc3_2, temp_bc3_3, temp_bc3_4]
 
     peg_string = game.generate_peg_string(user_guess)
@@ -401,7 +401,7 @@ def decode_row3():
     BUT3_4.grid(row=9, column=3, pady=4, padx=4)
     BUT3_4.configure(state=DISABLED)
 
-    BUT4_5.configure(state=NORMAL)
+    DECODE_BUTTON_4.configure(state=NORMAL)
 
     compare_guess_solution(user_guess)
 
@@ -410,12 +410,12 @@ def clk_but_3_1():
     """Player clicked but3_1 to change its colour."""
     global temp_bc3_1
 
-    u1.button_1 += 1
+    button_row_3.button_1 += 1
 
-    if u1.button_1 == 7:
-        u1.button_1 = 1
+    if button_row_3.button_1 == 7:
+        button_row_3.button_1 = 1
 
-    bc = u1.button_1
+    bc = button_row_3.button_1
     current_buttons[0] = str(colors[bc - 1])
 
     BUT3_1 = Button(
@@ -430,12 +430,12 @@ def clk_but_3_2():
     """Player clicked but3_2 to change its colour."""
     global temp_bc3_2
 
-    u1.button_2 += 1
+    button_row_3.button_2 += 1
 
-    if u1.button_2 == 7:
-        u1.button_2 = 1
+    if button_row_3.button_2 == 7:
+        button_row_3.button_2 = 1
 
-    bc = u1.button_2
+    bc = button_row_3.button_2
     current_buttons[1] = str(colors[bc - 1])
 
     BUT3_2 = Button(
@@ -450,12 +450,12 @@ def clk_but_3_3():
     """Player clicked but3_3 to change its colour."""
     global temp_bc3_3
 
-    u1.button_3 += 1
+    button_row_3.button_3 += 1
 
-    if u1.button_3 == 7:
-        u1.button_3 = 1
+    if button_row_3.button_3 == 7:
+        button_row_3.button_3 = 1
 
-    bc = u1.button_3
+    bc = button_row_3.button_3
     current_buttons[2] = str(colors[bc - 1])
 
     BUT3_3 = Button(
@@ -470,12 +470,12 @@ def clk_but_3_4():
     """Player clicked but 3_4 to change its colour."""
     global temp_bc3_4
 
-    u1.button_4 += 1
+    button_row_3.button_4 += 1
 
-    if u1.button_4 == 7:
-        u1.button_4 = 1
+    if button_row_3.button_4 == 7:
+        button_row_3.button_4 = 1
 
-    bc = u1.button_4
+    bc = button_row_3.button_4
     current_buttons[3] = str(colors[bc - 1])
 
     BUT3_4 = Button(
@@ -494,14 +494,14 @@ def decode_row4():
     global user_guess
 
     if (
-        v1.button_1 == 0
-        or v1.button_2 == 0
-        or v1.button_3 == 0
-        or v1.button_4 == 0
+        button_row_4.button_1 == 0
+        or button_row_4.button_2 == 0
+        or button_row_4.button_3 == 0
+        or button_row_4.button_4 == 0
     ):
         return
 
-    BUT4_5.configure(state=DISABLED)
+    DECODE_BUTTON_4.configure(state=DISABLED)
     user_guess = [temp_bc4_1, temp_bc4_2, temp_bc4_3, temp_bc4_4]
 
     peg_string = game.generate_peg_string(user_guess)
@@ -521,7 +521,7 @@ def decode_row4():
     BUT4_4.grid(row=10, column=3, pady=4, padx=4)
     BUT4_4.configure(state=DISABLED)
 
-    BUT5_5.configure(state=NORMAL)
+    DECODE_BUTTON_5.configure(state=NORMAL)
 
     compare_guess_solution(user_guess)
 
@@ -530,12 +530,12 @@ def clk_but_4_1():
     """Player clicked but4_1 to change its colour."""
     global temp_bc4_1
 
-    v1.button_1 += 1
+    button_row_4.button_1 += 1
 
-    if v1.button_1 == 7:
-        v1.button_1 = 1
+    if button_row_4.button_1 == 7:
+        button_row_4.button_1 = 1
 
-    bc = v1.button_1
+    bc = button_row_4.button_1
     current_buttons[0] = str(colors[bc - 1])
 
     BUT4_1 = Button(
@@ -550,12 +550,12 @@ def clk_but_4_2():
     """Player clicked but4_2 to change its colour."""
     global temp_bc4_2
 
-    v1.button_2 += 1
+    button_row_4.button_2 += 1
 
-    if v1.button_2 == 7:
-        v1.button_2 = 1
+    if button_row_4.button_2 == 7:
+        button_row_4.button_2 = 1
 
-    bc = v1.button_2
+    bc = button_row_4.button_2
     current_buttons[1] = str(colors[bc - 1])
 
     BUT4_2 = Button(
@@ -570,12 +570,12 @@ def clk_but_4_3():
     """Player clicked but4_3 to change its colour."""
     global temp_bc4_3
 
-    v1.button_3 += 1
+    button_row_4.button_3 += 1
 
-    if v1.button_3 == 7:
-        v1.button_3 = 1
+    if button_row_4.button_3 == 7:
+        button_row_4.button_3 = 1
 
-    bc = v1.button_3
+    bc = button_row_4.button_3
     current_buttons[2] = str(colors[bc - 1])
 
     BUT4_3 = Button(
@@ -590,12 +590,12 @@ def clk_but_4_4():
     """Player clicked but4_4 to change its colour."""
     global temp_bc4_4
 
-    v1.button_4 += 1
+    button_row_4.button_4 += 1
 
-    if v1.button_4 == 7:
-        v1.button_4 = 1
+    if button_row_4.button_4 == 7:
+        button_row_4.button_4 = 1
 
-    bc = v1.button_4
+    bc = button_row_4.button_4
     current_buttons[3] = str(colors[bc - 1])
 
     BUT4_4 = Button(
@@ -612,14 +612,14 @@ def decode_row5():
     global user_guess
 
     if (
-        w1.button_1 == 0
-        or w1.button_2 == 0
-        or w1.button_3 == 0
-        or w1.button_4 == 0
+        button_row_5.button_1 == 0
+        or button_row_5.button_2 == 0
+        or button_row_5.button_3 == 0
+        or button_row_5.button_4 == 0
     ):
         return
 
-    BUT5_5.configure(state=DISABLED)
+    DECODE_BUTTON_5.configure(state=DISABLED)
 
     user_guess = [temp_bc5_1, temp_bc5_2, temp_bc5_3, temp_bc5_4]
 
@@ -641,7 +641,7 @@ def decode_row5():
     BUT5_4.grid(row=11, column=3, pady=4, padx=4)
     BUT5_4.configure(state=DISABLED)
 
-    BUT6_5.configure(state=NORMAL)
+    DECODE_BUTTON_6.configure(state=NORMAL)
 
     compare_guess_solution(user_guess)
 
@@ -650,12 +650,12 @@ def clk_but_5_1():
     """Player clicked but5_1 to change its colour."""
     global temp_bc5_1
 
-    w1.button_1 += 1
+    button_row_5.button_1 += 1
 
-    if w1.button_1 == 7:
-        w1.button_1 = 1
+    if button_row_5.button_1 == 7:
+        button_row_5.button_1 = 1
 
-    bc = w1.button_1
+    bc = button_row_5.button_1
     current_buttons[0] = str(colors[bc - 1])
 
     BUT5_1 = Button(
@@ -670,12 +670,12 @@ def clk_but_5_2():
     """Player clicked but5_2 to change its colour."""
     global temp_bc5_2
 
-    w1.button_2 += 1
+    button_row_5.button_2 += 1
 
-    if w1.button_2 == 7:
-        w1.button_2 = 1
+    if button_row_5.button_2 == 7:
+        button_row_5.button_2 = 1
 
-    bc = w1.button_2
+    bc = button_row_5.button_2
     current_buttons[1] = str(colors[bc - 1])
 
     BUT5_2 = Button(
@@ -690,12 +690,12 @@ def clk_but_5_3():
     """Player clicked but5_3 to change its colour."""
     global temp_bc5_3
 
-    w1.button_3 += 1
+    button_row_5.button_3 += 1
 
-    if w1.button_3 == 7:
-        w1.button_3 = 1
+    if button_row_5.button_3 == 7:
+        button_row_5.button_3 = 1
 
-    bc = w1.button_3
+    bc = button_row_5.button_3
     current_buttons[2] = str(colors[bc - 1])
 
     BUT5_3 = Button(
@@ -710,12 +710,12 @@ def clk_but_5_4():
     """Player clicked but5_4 to change its colour."""
     global temp_bc5_4
 
-    w1.button_4 += 1
+    button_row_5.button_4 += 1
 
-    if w1.button_4 == 7:
-        w1.button_4 = 1
+    if button_row_5.button_4 == 7:
+        button_row_5.button_4 = 1
 
-    bc = w1.button_4
+    bc = button_row_5.button_4
     current_buttons[3] = str(colors[bc - 1])
 
     BUT5_4 = Button(
@@ -734,14 +734,14 @@ def decode_row6():
     global user_guess
 
     if (
-        x1.button_1 == 0
-        or x1.button_2 == 0
-        or x1.button_3 == 0
-        or x1.button_4 == 0
+        button_row_6.button_1 == 0
+        or button_row_6.button_2 == 0
+        or button_row_6.button_3 == 0
+        or button_row_6.button_4 == 0
     ):
         return
 
-    BUT6_5.configure(state=DISABLED)
+    DECODE_BUTTON_6.configure(state=DISABLED)
     user_guess = [temp_bc6_1, temp_bc6_2, temp_bc6_3, temp_bc6_4]
 
     peg_string = game.generate_peg_string(user_guess)
@@ -770,12 +770,12 @@ def clk_but_6_1():
     """Player clicked but6_1 to change its colour."""
     global temp_bc6_1
 
-    x1.button_1 += 1
+    button_row_6.button_1 += 1
 
-    if x1.button_1 == 7:
-        x1.button_1 = 1
+    if button_row_6.button_1 == 7:
+        button_row_6.button_1 = 1
 
-    bc = x1.button_1
+    bc = button_row_6.button_1
     current_buttons[0] = str(colors[bc - 1])
 
     BUT6_1 = Button(
@@ -790,12 +790,12 @@ def clk_but_6_2():
     """Player clicked but6_2 to change its colour."""
     global temp_bc6_2
 
-    x1.button_2 += 1
+    button_row_6.button_2 += 1
 
-    if x1.button_2 == 7:
-        x1.button_2 = 1
+    if button_row_6.button_2 == 7:
+        button_row_6.button_2 = 1
 
-    bc = x1.button_2
+    bc = button_row_6.button_2
     current_buttons[1] = str(colors[bc - 1])
 
     BUT6_2 = Button(
@@ -810,12 +810,12 @@ def clk_but_6_3():
     """Player clicked but6_3 to change its colour."""
     global temp_bc6_3
 
-    x1.button_3 += 1
+    button_row_6.button_3 += 1
 
-    if x1.button_3 == 7:
-        x1.button_3 = 1
+    if button_row_6.button_3 == 7:
+        button_row_6.button_3 = 1
 
-    bc = x1.button_3
+    bc = button_row_6.button_3
     current_buttons[2] = str(colors[bc - 1])
 
     BUT6_3 = Button(
@@ -830,12 +830,12 @@ def clk_but_6_4():
     """Player clicked but6_4 to change its colour."""
     global temp_bc6_4
 
-    x1.button_4 += 1
+    button_row_6.button_4 += 1
 
-    if x1.button_4 == 7:
-        x1.button_4 = 1
+    if button_row_6.button_4 == 7:
+        button_row_6.button_4 = 1
 
-    bc = x1.button_4
+    bc = button_row_6.button_4
     current_buttons[3] = str(colors[bc - 1])
 
     BUT6_4 = Button(
@@ -855,7 +855,7 @@ def display_solution():
     # Generate the four buttons that display the secret code.
     for index in range(len(game.secret_code)):
         # Create a button.
-        secret_button = Button(FRAME9, bg=game.secret_code[index])
+        secret_button = Button(SOLUTION_FRAME, bg=game.secret_code[index])
         # Assign its position.
         secret_button.grid(row=0, column=(4 + index), pady=4, padx=4)
         # Add it to the secret_buttons list.
@@ -871,7 +871,7 @@ def compare_guess_solution(user_guess):
 
     # Their solution was correct.
     # Reveal the secret code.
-    BUT3_9.destroy()
+    SOLUTION_BUTTON.destroy()
     display_solution()
     ROOT.update()
 
@@ -886,7 +886,7 @@ def compare_guess_solution(user_guess):
 def reveal_solution():
     """Reveal button has been clicked, so show secret_code."""
     # Reveal the secret code.
-    BUT3_9.destroy()
+    SOLUTION_BUTTON.destroy()
     display_solution()
     # Let them know they've lost.
     showinfo("Bletchley", "G A M E  O V E R  M A N\n\n")
@@ -897,7 +897,7 @@ def reveal_solution():
 FRAME0 = LabelFrame(ROOT, fg="blue", text="Bletchley", relief=SUNKEN)
 FRAME0.grid(padx=1, pady=1)
 
-FRAME10 = LabelFrame(ROOT, fg="blue", text="Bletchley v1.083", relief=SUNKEN)
+FRAME10 = LabelFrame(ROOT, fg="blue", text="Bletchley button_row_4.083", relief=SUNKEN)
 FRAME10.grid()
 LAB10 = Label(
     FRAME10,
@@ -920,8 +920,8 @@ BUT1_4 = Button(FRAME1, bg="skyblue", text=" ", command=clk_but_1_4)
 BUT1_4.grid(row=7, column=3, pady=4, padx=4)
 LAB1 = Label(FRAME1, bg="yellow", text="        ")
 LAB1.grid(row=7, column=4, pady=4, padx=4)
-BUT1_5 = Button(FRAME1, bg="green2", text="DECODE", command=decode_row1)
-BUT1_5.grid(row=7, column=5, pady=4, padx=4)
+DECODE_BUTTON_1 = Button(FRAME1, bg="green2", text="DECODE", command=decode_robutton_row_5)
+DECODE_BUTTON_1.grid(row=7, column=5, pady=4, padx=4)
 
 # Attempt 2 buttons.
 FRAME2 = LabelFrame(ROOT, fg="blue", text="Attempt 2", relief=SUNKEN)
@@ -936,8 +936,8 @@ BUT2_4 = Button(FRAME2, bg="skyblue", text=" ", command=clk_but_2_4)
 BUT2_4.grid(row=8, column=3, pady=4, padx=4)
 LAB2 = Label(FRAME2, bg="yellow", text="        ")
 LAB2.grid(row=8, column=4, pady=4, padx=4)
-BUT2_5 = Button(FRAME2, bg="green2", text="DECODE", command=decode_row2)
-BUT2_5.grid(row=8, column=5, pady=4, padx=4)
+DECODE_BUTTON_2 = Button(FRAME2, bg="green2", text="DECODE", command=decode_row2)
+DECODE_BUTTON_2.grid(row=8, column=5, pady=4, padx=4)
 
 # Attempt 3 buttons.
 FRAME3 = LabelFrame(ROOT, fg="blue", text="Attempt 3", relief=SUNKEN)
@@ -952,8 +952,8 @@ BUT3_4 = Button(FRAME3, bg="skyblue", text=" ", command=clk_but_3_4)
 BUT3_4.grid(row=9, column=3, pady=4, padx=4)
 LAB3 = Label(FRAME3, bg="yellow", text="        ")
 LAB3.grid(row=9, column=4, pady=4, padx=4)
-BUT3_5 = Button(FRAME3, bg="green2", text="DECODE", command=decode_row3)
-BUT3_5.grid(row=9, column=5, pady=4, padx=4)
+DECODE_BUTTON_3 = Button(FRAME3, bg="green2", text="DECODE", command=decode_row3)
+DECODE_BUTTON_3.grid(row=9, column=5, pady=4, padx=4)
 
 # Attempt 4 buttons.
 FRAME4 = LabelFrame(ROOT, fg="blue", text="Attempt 4", relief=SUNKEN)
@@ -968,8 +968,8 @@ BUT4_4 = Button(FRAME4, bg="skyblue", text=" ", command=clk_but_4_4)
 BUT4_4.grid(row=10, column=3, pady=4, padx=4)
 LAB4 = Label(FRAME4, bg="yellow", text="        ")
 LAB4.grid(row=10, column=4, pady=4, padx=4)
-BUT4_5 = Button(FRAME4, bg="green2", text="DECODE", command=decode_row4)
-BUT4_5.grid(row=10, column=5, pady=4, padx=4)
+DECODE_BUTTON_4 = Button(FRAME4, bg="green2", text="DECODE", command=decode_row4)
+DECODE_BUTTON_4.grid(row=10, column=5, pady=4, padx=4)
 
 # Attempt 5 buttons.
 FRAME5 = LabelFrame(ROOT, fg="blue", text="Attempt 5", relief=SUNKEN)
@@ -984,8 +984,8 @@ BUT5_4 = Button(FRAME5, bg="skyblue", text=" ", command=clk_but_5_4)
 BUT5_4.grid(row=11, column=3, pady=4, padx=4)
 LAB5 = Label(FRAME5, bg="yellow", text="        ")
 LAB5.grid(row=11, column=4, pady=4, padx=4)
-BUT5_5 = Button(FRAME5, bg="green2", text="DECODE", command=decode_row5)
-BUT5_5.grid(row=11, column=5, pady=4, padx=4)
+DECODE_BUTTON_5 = Button(FRAME5, bg="green2", text="DECODE", command=decode_row5)
+DECODE_BUTTON_5.grid(row=11, column=5, pady=4, padx=4)
 
 # Attempt 6 buttons.
 FRAME6 = LabelFrame(ROOT, fg="blue", text="Attempt 6", relief=SUNKEN)
@@ -1000,33 +1000,33 @@ BUT6_4 = Button(FRAME6, bg="skyblue", text=" ", command=clk_but_6_4)
 BUT6_4.grid(row=12, column=3, pady=4, padx=4)
 LAB6 = Label(FRAME6, bg="yellow", text="        ")
 LAB6.grid(row=12, column=4, pady=4, padx=4)
-BUT6_5 = Button(FRAME6, bg="green2", text="DECODE", command=decode_row6)
-BUT6_5.grid(row=12, column=5, pady=4, padx=4)
+DECODE_BUTTON_6 = Button(FRAME6, bg="green2", text="DECODE", command=decode_row6)
+DECODE_BUTTON_6.grid(row=12, column=5, pady=4, padx=4)
 
 # Initiaize classes.
 # game ect. is just a name we can make up to reference the class
 # and pass the initial state of the variables to it.
 game = BletchleyGame()
-s1 = button_up_row(0, 0, 0, 0)
-t1 = button_up_row(0, 0, 0, 0)
-u1 = button_up_row(0, 0, 0, 0)
-v1 = button_up_row(0, 0, 0, 0)
-w1 = button_up_row(0, 0, 0, 0)
-x1 = button_up_row(0, 0, 0, 0)
+button_row_1 = button_up_row(0, 0, 0, 0)
+button_row_2 = button_up_row(0, 0, 0, 0)
+button_row_3 = button_up_row(0, 0, 0, 0)
+button_row_4 = button_up_row(0, 0, 0, 0)
+button_row_5 = button_up_row(0, 0, 0, 0)
+button_row_6 = button_up_row(0, 0, 0, 0)
 
 # Make sure player can only decode row 1 to start with
 # by disabling all other decode buttons.
-BUT2_5.configure(state=DISABLED)
-BUT3_5.configure(state=DISABLED)
-BUT4_5.configure(state=DISABLED)
-BUT5_5.configure(state=DISABLED)
-BUT6_5.configure(state=DISABLED)
+DECODE_BUTTON_2.configure(state=DISABLED)
+DECODE_BUTTON_3.configure(state=DISABLED)
+DECODE_BUTTON_4.configure(state=DISABLED)
+DECODE_BUTTON_5.configure(state=DISABLED)
+DECODE_BUTTON_6.configure(state=DISABLED)
 
 # cover up secret code with a button.
-FRAME9 = LabelFrame(ROOT, fg="blue", text="solution", relief=SUNKEN)
-FRAME9.grid()
-BUT3_9 = Button(FRAME9, bg="gold", text="REVEAL", command=reveal_solution)
-BUT3_9.grid(row=9, column=5, pady=4, padx=4)
+SOLUTION_FRAME = LabelFrame(ROOT, fg="blue", text="solution", relief=SUNKEN)
+SOLUTION_FRAME.grid()
+SOLUTION_BUTTON = Button(SOLUTION_FRAME, bg="gold", text="REVEAL", command=reveal_solution)
+SOLUTION_BUTTON.grid(row=9, column=5, pady=4, padx=4)
 
 # ---Now program control is waiting for button clicks to commence game.-------
 
