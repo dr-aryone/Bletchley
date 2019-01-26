@@ -1,11 +1,13 @@
-"""The Music Library
+"""The Music Library.
 
 This library enables us to play music from within the Bletchley application.
 """
 
 import os
-from pygame import mixer
 from tkinter import messagebox
+
+from pygame import mixer
+
 
 class Tunes(object):
     """A music-playing class."""
@@ -28,8 +30,8 @@ class Tunes(object):
         The `song_file` variable defines which track will be played, from the
         options defined in the above `available_songs` dictionary.
         """
-        # Set the path to the specified music track. We're using os.path.join here
-        # so that this function will work with any OS, not just Windows.
+        # Set the path to the specified music track. We're using os.path.join
+        # here so that this function will work with any OS, not just Windows.
         track_file = os.path.join("music", song_file)
         # Check to ensure the track exists.
         if os.path.isfile(track_file):
