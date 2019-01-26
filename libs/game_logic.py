@@ -72,7 +72,7 @@ class BletchleyGame(object):
 
     def correct_solution(self, user_guess):
         """Check to see whether the user's guess is the correct solution."""
-        if(self.generate_peg_string(user_guess) == "****"):
+        if self.generate_peg_string(user_guess) == "****":
             # Their solution is correct.
             return True
         # Their solution is incorrect.

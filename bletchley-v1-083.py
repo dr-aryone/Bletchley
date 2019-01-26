@@ -30,7 +30,7 @@ available_songs = {
 # Initialize the Tunes class.
 tunes = music.Tunes(available_songs)
 
-user_input = []
+user_guess = []
 secret_code = []
 colors = ["red", "blue", "white", "yellow", "green", "plum"]
 
@@ -178,7 +178,7 @@ class button_up_row6:
 # -----------------------------row 1 functions----------------------------
 def decode_row1():
     """Check result of the decode button press for row 1."""
-    global user_input
+    global user_guess
 
     # exit if all 4 colours not entered yet
     if (
@@ -192,11 +192,11 @@ def decode_row1():
     # Disable decode button, so no cheating.
     BUT1_5.configure(state=DISABLED)
 
-    # Build user_input string.
-    user_input = [temp_bc1_1, temp_bc1_2, temp_bc1_3, temp_bc1_4]
+    # Build user_guess string.
+    user_guess = [temp_bc1_1, temp_bc1_2, temp_bc1_3, temp_bc1_4]
 
     # Construct the outcome string for output to the yesllow label.
-    peg_string = game.generate_peg_string(user_input)
+    peg_string = game.generate_peg_string(user_guess)
 
     # rnd shuffle the out_come answer so player does not see order of results
 
@@ -226,7 +226,7 @@ def decode_row1():
     BUT2_5.configure(state=NORMAL)
 
     # Check user-input against secret_code.
-    compare_guess_solution(user_input, game.secret_code)
+    compare_guess_solution(user_guess)
 
 
 def clk_but_1_1():
@@ -319,7 +319,7 @@ def clk_but_1_4():
 
 def decode_row2():
     """Decode button for row 2 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         t1.but_col_2_1 == 0
@@ -331,9 +331,9 @@ def decode_row2():
 
     BUT2_5.configure(state=DISABLED)
 
-    user_input = [temp_bc2_1, temp_bc2_2, temp_bc2_3, temp_bc2_4]
+    user_guess = [temp_bc2_1, temp_bc2_2, temp_bc2_3, temp_bc2_4]
 
-    peg_string = game.generate_peg_string(user_input)
+    peg_string = game.generate_peg_string(user_guess)
 
     LAB1 = Label(FRAME2, bg="yellow", text=peg_string)
     LAB1.grid(row=8, column=4, pady=4, padx=4, sticky=W)
@@ -353,7 +353,7 @@ def decode_row2():
 
     BUT2_4.configure(state=DISABLED)
 
-    compare_guess_solution(user_input, game.secret_code)
+    compare_guess_solution(user_guess)
 
 
 def clk_but_2_1():
@@ -441,7 +441,7 @@ def clk_but_2_4():
 
 def decode_row3():
     """Decode button for row 3 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         u1.but_col_3_1 == 0
@@ -452,9 +452,9 @@ def decode_row3():
         return
 
     BUT3_5.configure(state=DISABLED)
-    user_input = [temp_bc3_1, temp_bc3_2, temp_bc3_3, temp_bc3_4]
+    user_guess = [temp_bc3_1, temp_bc3_2, temp_bc3_3, temp_bc3_4]
 
-    peg_string = game.generate_peg_string(user_input)
+    peg_string = game.generate_peg_string(user_guess)
 
     LAB1 = Label(FRAME3, bg="yellow", text=peg_string)
     LAB1.grid(row=9, column=4, pady=4, padx=4, sticky=W)
@@ -474,7 +474,7 @@ def decode_row3():
 
     BUT4_5.configure(state=NORMAL)
 
-    compare_guess_solution(user_input, game.secret_code)
+    compare_guess_solution(user_guess)
 
 
 def clk_but_3_1():
@@ -562,7 +562,7 @@ def clk_but_3_4():
 
 def decode_row4():
     """Decode button for row 4 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         v1.but_col_4_1 == 0
@@ -573,9 +573,9 @@ def decode_row4():
         return
 
     BUT4_5.configure(state=DISABLED)
-    user_input = [temp_bc4_1, temp_bc4_2, temp_bc4_3, temp_bc4_4]
+    user_guess = [temp_bc4_1, temp_bc4_2, temp_bc4_3, temp_bc4_4]
 
-    peg_string = game.generate_peg_string(user_input)
+    peg_string = game.generate_peg_string(user_guess)
 
     LAB1 = Label(FRAME4, bg="yellow", text=peg_string)
     LAB1.grid(row=10, column=4, pady=4, padx=4, sticky=W)
@@ -594,7 +594,7 @@ def decode_row4():
 
     BUT5_5.configure(state=NORMAL)
 
-    compare_guess_solution(user_input, game.secret_code)
+    compare_guess_solution(user_guess)
 
 
 def clk_but_4_1():
@@ -680,7 +680,7 @@ def clk_but_4_4():
 # ---------------------------start row 5---------------------------------------
 def decode_row5():
     """Decode button for row 5 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         w1.but_col_5_1 == 0
@@ -692,9 +692,9 @@ def decode_row5():
 
     BUT5_5.configure(state=DISABLED)
 
-    user_input = [temp_bc5_1, temp_bc5_2, temp_bc5_3, temp_bc5_4]
+    user_guess = [temp_bc5_1, temp_bc5_2, temp_bc5_3, temp_bc5_4]
 
-    peg_string = game.generate_peg_string(user_input)
+    peg_string = game.generate_peg_string(user_guess)
 
     LAB5 = Label(FRAME5, bg="yellow", text=peg_string)
     LAB5.grid(row=11, column=4, pady=4, padx=4, sticky=W)
@@ -714,7 +714,7 @@ def decode_row5():
 
     BUT6_5.configure(state=NORMAL)
 
-    compare_guess_solution(user_input, game.secret_code)
+    compare_guess_solution(user_guess)
 
 
 def clk_but_5_1():
@@ -802,7 +802,7 @@ def clk_but_5_4():
 
 def decode_row6():
     """Decode button for row 6 has been clicked so check input."""
-    global user_input
+    global user_guess
 
     if (
         x1.but_col_6_1 == 0
@@ -813,9 +813,9 @@ def decode_row6():
         return
 
     BUT6_5.configure(state=DISABLED)
-    user_input = [temp_bc6_1, temp_bc6_2, temp_bc6_3, temp_bc6_4]
+    user_guess = [temp_bc6_1, temp_bc6_2, temp_bc6_3, temp_bc6_4]
 
-    peg_string = game.generate_peg_string(user_input)
+    peg_string = game.generate_peg_string(user_guess)
 
     LAB6 = Label(FRAME6, bg="yellow", text=peg_string)
     LAB6.grid(row=12, column=4, pady=4, padx=4, sticky=W)
@@ -834,7 +834,7 @@ def decode_row6():
 
     BUT6_4.configure(state=DISABLED)
 
-    compare_guess_solution(user_input, game.secret_code)
+    compare_guess_solution(user_guess)
 
 
 def clk_but_6_1():
@@ -933,9 +933,10 @@ def display_solution():
         secret_buttons.append(secret_button)
 
 
-def compare_guess_solution(user_input, secret_code):
+def compare_guess_solution(user_guess):
     """Check what player pegs match secret code."""
-    if not game.correct_solution(user_input):
+    # Check to see if their guess was correct.
+    if not game.correct_solution(user_guess):
         # Their guess was incorrect.
         return None
 
