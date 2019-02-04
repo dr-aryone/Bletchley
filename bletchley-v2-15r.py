@@ -169,11 +169,9 @@ class GameWindow(object):
         """Reveal the solution to the player."""
         secret_buttons = list()
         # Generate the four buttons that display the secret code.
-        for index in range(len(self.game.secret_code)):
+        for index, bg in enumerate(self.game.secret_code):
             # Create a button.
-            secret_button = Button(
-                self.SOLUTION_FRAME, bg=self.game.secret_code[index]
-            )
+            secret_button = Button(self.SOLUTION_FRAME, bg=bg)
             # Assign its position.
             secret_button.grid(row=0, column=(4 + index), pady=4, padx=4)
             # Add it to the secret_buttons list.
