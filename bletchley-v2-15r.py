@@ -63,12 +63,11 @@ class GameWindow(object):
 
     def click_button(self, row_index, button_index):
         """Register the user's button-click by changing this button's color."""
-        try:
-            # Select the next color.
-            current_value = self.button_rows[row_index][button_index] + 1
-        except Exception as e:
-            # There was no color set (this is the first click). Set to 0.
+        current_value = self.button_rows[row_index][button_index]
+        if current_value is None:
             current_value = 0
+        else:
+            current_value += 1
         # Set the new color. If we've run through the colors, loop back around.
         self.button_rows[row_index][button_index] = (
             current_value if current_value < 6 else 0
