@@ -191,9 +191,9 @@ class GameWindow(object):
         self.tunes = music.Tunes(available_songs)
 
         # Initialize the dictionary that stores the user's guesses per-row.
-        self.button_rows = dict()
-        for row in range(6):
-            self.button_rows[row] = [None] * 4
+        self.button_rows = {
+            i: [None] * 4 for i in range(6)
+        }
 
         # Construct the main window.
         self.ROOT = Tk()
